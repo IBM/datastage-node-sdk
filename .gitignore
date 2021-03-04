@@ -6,7 +6,7 @@ auth/*.js
 **/*.js.map
 
 # service-specific tsc outputs (js files)
-example-service/*.js
+# example-service/*.js
 # IGNORE YOUR SERVICE FILES HERE
 
 # file holding service credentials

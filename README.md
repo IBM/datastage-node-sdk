@@ -1,11 +1,11 @@
-[![Build Status](https://travis.ibm.com/CloudEngineering/node-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/CloudEngineering/node-sdk-template)
+[![Build Status](https://travis-ci.com/ibmcloud/datastage-node-sdk.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/ibmcloud/datastage-node-sdk)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 <!--
-[![npm-version](https://img.shields.io/npm/v/CloudEngineering/node-sdk-template.svg)](https://www.npmjs.com/package/node-sdk-template)
-[![codecov](https://codecov.io/gh/CloudEngineering/node-sdk-template/branch/main/graph/badge.svg)](https://codecov.io/gh/CloudEngineering/node-sdk-template)
+[![npm-version](https://img.shields.io/npm/v/ibmcloud/datastage-node-sdk.svg)](https://www.npmjs.com/package/datastage)
+[![codecov](https://codecov.io/gh/ibmcloud/datastage-node-sdk/branch/main/graph/badge.svg)](https://codecov.io/gh/ibmcloud/datastage-node-sdk)
 -->
-# IBM Cloud MySDK Node.js SDK
-Node.js client library to interact with various [MySDK APIs](https://cloud.ibm.com/apidocs?category=<service-category>).
+# IBM DataStage SDK for Node
+Node.js client library to interact with various [DataStage APIs](https://cloud.ibm.com/apidocs?category=datastage).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
@@ -39,12 +39,12 @@ Changes might occur which impact applications that use this SDK.
 <!-- --------------------------------------------------------------- -->
 ## Overview
 
-The IBM Cloud MySDK Node.js SDK allows developers to programmatically interact with the following
+The IBM Cloud DataStage Node.js SDK allows developers to programmatically interact with the following
 IBM Cloud services:
 
 Service Name | Import Path
 --- | ---
-[Example Service](https://cloud.ibm.com/apidocs/example-service) | mysdk/example-service/v1
+<!-- [Example Service](https://cloud.ibm.com/apidocs/example-service) | datastage/example-service/v1 -->
 
 ## Prerequisites
 * You need an [IBM Cloud][ibm-cloud-onboarding] account.
@@ -55,7 +55,7 @@ Service Name | Import Path
 ## Installation
 
 ```sh
-npm install mysdk
+npm install datastage
 ```
 
 ## Using the SDK
@@ -70,7 +70,7 @@ please ask a question at
 
 ## Issues
 If you encounter an issue with the SDK, you are welcome to submit
-a [bug report](<github-repo-url>/issues).
+a [bug report](https://github.ibm.com/ibmcloud/datastage-node-sdk/issues).
 Before that, please search for similar issues. It's possible someone has
 already encountered this issue.
 

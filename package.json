@@ -1,10 +1,10 @@
 {
-  "name": "mysdk",
+  "name": "datastage",
   "version": "0.0.1",
-  "description": "IBM Cloud Node SDK",
+  "description": "IBM DataStage SDK for Node",
   "repository": {
     "type": "git",
-    "url": "https://github.ibm.com/CloudEngineering/node-sdk-template"
+    "url": "https://github.ibm.com/ibmcloud/datastage-node-sdk"
   },
   "keywords": [
     "ibm"
@@ -54,7 +54,7 @@
     "installed-check": "^2.2.0",
     "jest": "^25.4.0",
     "prettier": "^1.17.1",
-    "semantic-release": "17.3.1",
+    "semantic-release": "^17.4.0",
     "tsc-publish": "^0.5.2",
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
