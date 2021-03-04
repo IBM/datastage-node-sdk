@@ -2,11 +2,9 @@ language: node_js
 
 sudo: false
 
-# After creating your SDK project from this template repository,
-# uncomment this section to enable builds on the appropriate node versions.
-# node_js:
-# - 10
-# - 12
+node_js:
+- 10
+- 12
 
 before_install:
 - echo -e "machine github.ibm.com\n  login $GITHUB_OAUTH_TOKEN" > ~/.netrc
@@ -19,21 +17,6 @@ script:
 - npm run check-packages
 # - sh scripts/typedoc/generate_typedoc.sh currently in progress
 
-# After creating your SDK project from this template repository,
-# remove this entire "jobs" section as this is only applicable
-# to the template repo's travis build.
-jobs:
-  include:
-    - stage: Run node template build
-      node_js: 10
-    - node_js: 12
-    - stage: Run system test with template
-      node_js: 10
-      script:
-        - git clone https://github.ibm.com/CloudEngineering/sdkgen-systest.git
-        - cd sdkgen-systest
-        - ./install_scripts/install_deps_ubuntu.sh
-        - ./setup_and_generate.sh -l ibm-node -t $TRAVIS_BRANCH -s
 
 
 after_success:

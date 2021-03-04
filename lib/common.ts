@@ -28,11 +28,11 @@ export type SdkHeaders = {
  *
  * If you plan to gather metrics for your SDK, the User-Agent header value must
  * be a string similar to the following:
- * my-node-sdk/0.0.1 (lang=node.js; os.name=Linux; os.version=19.3.0; node.version=v10.15.3)
+ * datastage-node-sdk/0.0.1 (lang=node.js; os.name=Linux; os.version=19.3.0; node.version=v10.15.3)
  *
  * In the example above, the analytics tool will parse the user-agent header and
  * use the following properties:
- * "my-node-sdk" - the name of your sdk
+ * "datastage-node-sdk" - the name of your sdk
  * "0.0.1"- the version of your sdk
  * "lang=node.js" - the language of the current sdk
  * "os.name=Linux; os.version=19.3.0; node.version=v10.15.3" - system information
@@ -41,7 +41,7 @@ export type SdkHeaders = {
  * as the analytics data collector uses this to gather usage data.
  */
 export function getSdkHeaders(serviceName: string, serviceVersion: string, operationId: string): SdkHeaders | {} {
-  const sdkName = 'my-node-sdk';
+  const sdkName = 'datastage-node-sdk';
   const sdkVersion = pkg.version;
   const osName = os.platform();
   const osVersion = os.release();
