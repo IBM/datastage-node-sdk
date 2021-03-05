@@ -1196,32 +1196,36 @@ namespace IbmApiForDataFlowServiceV3 {
     doc_type?: string;
     /** Pipeline flow version. */
     version?: string;
-    /** Pipeline flow schema used. */
+    /** Refers to the JSON schema used to validate documents of this type. */
     json_schema?: string;
-    /** Pipeline flow ID. */
+    /** Document identifier, GUID recommended. */
     id?: string;
-    /** Primary pipeline ID. */
+    /** Reference to the primary (main) pipeline flow within the document. */
     primary_pipeline?: string;
     pipelines?: Pipelines[];
     /** Array of data record schemas used in the pipeline. */
-    schemas?: JsonObject;
+    schemas?: JsonObject[];
     /** Runtime information for pipeline flow. */
-    runtimes?: JsonObject;
-    /** Additional parameters for pipeline flow. */
+    runtimes?: JsonObject[];
+    /** Object containing app-specific data. */
     app_data?: JsonObject;
+    /** Parameters for the flow document. */
+    parameters?: JsonObject;
+    /** Array of parameter set references. */
+    external_paramsets?: JsonObject[];
   }
 
   /** Pipelines. */
   export interface Pipelines {
-    /** Pipeline ID. */
+    /** Unique identifier. */
     id?: string;
     /** A brief description of the DataStage flow. */
     description?: string;
     /** Reference to the runtime type. */
     runtime_ref?: string;
     /** Array of pipeline nodes. */
-    nodes?: JsonObject;
-    /** additional parameters for pipeline flow. */
+    nodes?: JsonObject[];
+    /** Object containing app-specific data. */
     app_data?: JsonObject;
   }
 

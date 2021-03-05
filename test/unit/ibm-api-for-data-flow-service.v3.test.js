@@ -174,7 +174,7 @@ describe('IbmApiForDataFlowServiceV3', () => {
         id: 'fa1b859a-d592-474d-b56c-2137e4efa4bc',
         description: 'A test DataStage flow',
         runtime_ref: 'pxOsh',
-        nodes: { foo: 'bar' },
+        nodes: [{ foo: 'bar' }],
         app_data: { foo: 'bar' },
       };
 
@@ -186,9 +186,11 @@ describe('IbmApiForDataFlowServiceV3', () => {
         id: '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff',
         primary_pipeline: 'fa1b859a-d592-474d-b56c-2137e4efa4bc',
         pipelines: [pipelinesModel],
-        schemas: { foo: 'bar' },
-        runtimes: { foo: 'bar' },
+        schemas: [{ foo: 'bar' }],
+        runtimes: [{ foo: 'bar' }],
         app_data: { foo: 'bar' },
+        parameters: { foo: 'bar' },
+        external_paramsets: [{ foo: 'bar' }],
       };
 
       test('should pass the right params to createRequest', () => {
@@ -429,7 +431,7 @@ describe('IbmApiForDataFlowServiceV3', () => {
         id: 'fa1b859a-d592-474d-b56c-2137e4efa4bc',
         description: 'A test DataStage flow',
         runtime_ref: 'pxOsh',
-        nodes: { foo: 'bar' },
+        nodes: [{ foo: 'bar' }],
         app_data: { foo: 'bar' },
       };
 
@@ -441,9 +443,11 @@ describe('IbmApiForDataFlowServiceV3', () => {
         id: '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff',
         primary_pipeline: 'fa1b859a-d592-474d-b56c-2137e4efa4bc',
         pipelines: [pipelinesModel],
-        schemas: { foo: 'bar' },
-        runtimes: { foo: 'bar' },
+        schemas: [{ foo: 'bar' }],
+        runtimes: [{ foo: 'bar' }],
         app_data: { foo: 'bar' },
+        parameters: { foo: 'bar' },
+        external_paramsets: [{ foo: 'bar' }],
       };
 
       test('should pass the right params to createRequest', () => {
