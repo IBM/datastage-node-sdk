@@ -83,3 +83,4 @@ secrets.tar
 
 # SDK generator
 .openapi-generator*
+/.gradle/

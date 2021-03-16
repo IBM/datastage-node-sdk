@@ -25,30 +25,29 @@ import { Authenticator, BaseService, getAuthenticatorFromEnvironment, getMissing
 import { getSdkHeaders } from '../lib/common';
 
 /**
- * The IBM  Data API Data Flow service provides APIs to manage, edit, and run data flows in supported runtimes such as
- * PX-Engine.
+ * The IBM DataStage service provides APIs to manage, edit, and run data flows in supported runtimes such as PX-Engine.
  */
 
-class IbmApiForDataFlowServiceV3 extends BaseService {
+class DatastageV3 extends BaseService {
 
-  static DEFAULT_SERVICE_URL: string = 'https://ibm-api-for-data-flow-service.cloud.ibm.com/data_intg';
-  static DEFAULT_SERVICE_NAME: string = 'ibm_api_for_data_flow_service';
+  static DEFAULT_SERVICE_URL: string = 'https://datastage.cloud.ibm.com/data_intg';
+  static DEFAULT_SERVICE_NAME: string = 'datastage';
 
   /*************************
    * Factory method
    ************************/
 
   /**
-   * Constructs an instance of IbmApiForDataFlowServiceV3 with passed in options and external configuration.
+   * Constructs an instance of DatastageV3 with passed in options and external configuration.
    *
    * @param {UserOptions} [options] - The parameters to send to the service.
    * @param {string} [options.serviceName] - The name of the service to configure
    * @param {Authenticator} [options.authenticator] - The Authenticator object used to authenticate requests to the service
    * @param {string} [options.serviceUrl] - The URL for the service
-   * @returns {IbmApiForDataFlowServiceV3}
+   * @returns {DatastageV3}
    */
 
-  public static newInstance(options: UserOptions): IbmApiForDataFlowServiceV3 {
+  public static newInstance(options: UserOptions): DatastageV3 {
     options = options || {};
 
     if (!options.serviceName) {
@@ -57,7 +56,7 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
     if (!options.authenticator) {
       options.authenticator = getAuthenticatorFromEnvironment(options.serviceName);
     }
-    const service = new IbmApiForDataFlowServiceV3(options);
+    const service = new DatastageV3(options);
     service.configureService(options.serviceName);
     if (options.serviceUrl) {
       service.setServiceUrl(options.serviceUrl);
@@ -67,14 +66,14 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
 
 
   /**
-   * Construct a IbmApiForDataFlowServiceV3 object.
+   * Construct a DatastageV3 object.
    *
    * @param {Object} options - Options for the service.
    * @param {string} [options.serviceUrl] - The base url to use when contacting the service. The base url may differ between IBM Cloud regions.
    * @param {OutgoingHttpHeaders} [options.headers] - Default headers that shall be included with every request to the service.
    * @param {Authenticator} options.authenticator - The Authenticator object used to authenticate requests to the service
    * @constructor
-   * @returns {IbmApiForDataFlowServiceV3}
+   * @returns {DatastageV3}
    */
   constructor(options: UserOptions) {
     options = options || {};
@@ -83,13 +82,67 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
     if (options.serviceUrl) {
       this.setServiceUrl(options.serviceUrl);
     } else {
-      this.setServiceUrl(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_URL);
+      this.setServiceUrl(DatastageV3.DEFAULT_SERVICE_URL);
     }
   }
 
   /*************************
    * dataStageFlows
    ************************/
+
+  /**
+   * Delete DataStage flows.
+   *
+   * Deletes the specified data flows in a project or catalog (either project_id or catalog_id must be set).
+   *
+   * If the deletion of the data flows and their runs will take some time to finish, then a 202 response will be
+   * returned and the deletion will continue asynchronously.
+   *          All the data flow runs associated with the data flows will also be deleted. If a data flow is still
+   * running, it will not be deleted unless the force parameter is set to true. If a data flow is still running and the
+   * force parameter is set to true, the call returns immediately with a 202 response. The related data flows are
+   * deleted after the data flow runs are stopped.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string[]} params.id - The list of DataStage flow IDs to delete.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
+   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {boolean} [params.force] - Whether to stop all running data flows. Running DataStage flows must be stopped
+   * before the DataStage flows can be deleted.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DatastageV3.Response<DatastageV3.Empty>>}
+   */
+  public datastageFlowsDelete(params: DatastageV3.DatastageFlowsDeleteParams): Promise<DatastageV3.Response<DatastageV3.Empty>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['id'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const query = {
+      'id': _params.id,
+      'catalog_id': _params.catalogId,
+      'project_id': _params.projectId,
+      'force': _params.force
+    };
+
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsDelete');
+
+    const parameters = {
+      options: {
+        url: '/v3/data_intg_flows',
+        method: 'DELETE',
+        qs: query,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
 
   /**
    * Get metadata and lock information for DataStage flows.
@@ -128,9 +181,9 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
    * @param {string} [params.entityName] - Filter results based on the specified name.
    * @param {string} [params.entityDescription] - Filter results based on the specified description.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.DataFlowPagedCollection>>}
+   * @returns {Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>>}
    */
-  public datastageFlowsList(params?: IbmApiForDataFlowServiceV3.DatastageFlowsListParams): Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.DataFlowPagedCollection>> {
+  public datastageFlowsList(params?: DatastageV3.DatastageFlowsListParams): Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>> {
     const _params = Object.assign({}, params);
 
     const query = {
@@ -143,7 +196,7 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
       'entity.description': _params.entityDescription
     };
 
-    const sdkHeaders = getSdkHeaders(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsList');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsList');
 
     const parameters = {
       options: {
@@ -175,9 +228,9 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
    * @param {string} [params.assetCategory] - The category of the asset. Must be either SYSTEM or USER. Only a
    * registered service can use this parameter.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.DataIntgFlow>>}
+   * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public datastageFlowsCreate(params: IbmApiForDataFlowServiceV3.DatastageFlowsCreateParams): Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.DataIntgFlow>> {
+  public datastageFlowsCreate(params: DatastageV3.DatastageFlowsCreateParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['dataIntgFlowName'];
 
@@ -197,7 +250,7 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
       'asset_category': _params.assetCategory
     };
 
-    const sdkHeaders = getSdkHeaders(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsCreate');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsCreate');
 
     const parameters = {
       options: {
@@ -218,60 +271,6 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
   };
 
   /**
-   * Delete DataStage flows.
-   *
-   * Deletes the specified data flows in a project or catalog (either project_id or catalog_id must be set).
-   *
-   * If the deletion of the data flows and their runs will take some time to finish, then a 202 response will be
-   * returned and the deletion will continue asynchronously.
-   *          All the data flow runs associated with the data flows will also be deleted. If a data flow is still
-   * running, it will not be deleted unless the force parameter is set to true. If a data flow is still running and the
-   * force parameter is set to true, the call returns immediately with a 202 response. The related data flows are
-   * deleted after the data flow runs are stopped.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string[]} params.id - The list of DataStage flow IDs to delete.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
-   * @param {boolean} [params.force] - Whether to stop all running data flows. Running DataStage flows must be stopped
-   * before the DataStage flows can be deleted.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.Empty>>}
-   */
-  public datastageFlowsDelete(params: IbmApiForDataFlowServiceV3.DatastageFlowsDeleteParams): Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.Empty>> {
-    const _params = Object.assign({}, params);
-    const requiredParams = ['id'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
-    }
-
-    const query = {
-      'id': _params.id,
-      'catalog_id': _params.catalogId,
-      'project_id': _params.projectId,
-      'force': _params.force
-    };
-
-    const sdkHeaders = getSdkHeaders(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsDelete');
-
-    const parameters = {
-      options: {
-        url: '/v3/data_intg_flows',
-        method: 'DELETE',
-        qs: query,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
-  /**
    * Get DataStage flow.
    *
    * Lists the DataStage flow that is contained in the specified project. Attachments, metadata and a limited number of
@@ -282,9 +281,9 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
    * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
    * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.DataIntgFlow>>}
+   * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>>}
    */
-  public datastageFlowsGet(params: IbmApiForDataFlowServiceV3.DatastageFlowsGetParams): Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.DataIntgFlow>> {
+  public datastageFlowsGet(params: DatastageV3.DatastageFlowsGetParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['dataIntgFlowId'];
 
@@ -302,7 +301,7 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
       'data_intg_flow_id': _params.dataIntgFlowId
     };
 
-    const sdkHeaders = getSdkHeaders(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsGet');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsGet');
 
     const parameters = {
       options: {
@@ -334,9 +333,9 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
    * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
    * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.DataIntgFlow>>}
+   * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public datastageFlowsUpdate(params: IbmApiForDataFlowServiceV3.DatastageFlowsUpdateParams): Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.DataIntgFlow>> {
+  public datastageFlowsUpdate(params: DatastageV3.DatastageFlowsUpdateParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['dataIntgFlowId', 'dataIntgFlowName'];
 
@@ -359,7 +358,7 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
       'data_intg_flow_id': _params.dataIntgFlowId
     };
 
-    const sdkHeaders = getSdkHeaders(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsUpdate');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsUpdate');
 
     const parameters = {
       options: {
@@ -391,9 +390,9 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
    * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
    * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.DataIntgFlow>>}
+   * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public datastageFlowsClone(params: IbmApiForDataFlowServiceV3.DatastageFlowsCloneParams): Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.DataIntgFlow>> {
+  public datastageFlowsClone(params: DatastageV3.DatastageFlowsCloneParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['dataIntgFlowId'];
 
@@ -411,7 +410,7 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
       'data_intg_flow_id': _params.dataIntgFlowId
     };
 
-    const sdkHeaders = getSdkHeaders(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsClone');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsClone');
 
     const parameters = {
       options: {
@@ -443,9 +442,9 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
    * @param {string} [params.runtimeType] - The type of the runtime to use. e.g. dspxosh or Spark etc. If not provided
    * queried from within pipeline flow if available otherwise default of dspxosh is used.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.FlowCompileResponse>>}
+   * @returns {Promise<DatastageV3.Response<DatastageV3.FlowCompileResponse>>}
    */
-  public datastageFlowsCompile(params: IbmApiForDataFlowServiceV3.DatastageFlowsCompileParams): Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.FlowCompileResponse>> {
+  public datastageFlowsCompile(params: DatastageV3.DatastageFlowsCompileParams): Promise<DatastageV3.Response<DatastageV3.FlowCompileResponse>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['dataIntgFlowId'];
 
@@ -464,7 +463,7 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
       'data_intg_flow_id': _params.dataIntgFlowId
     };
 
-    const sdkHeaders = getSdkHeaders(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsCompile');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsCompile');
 
     const parameters = {
       options: {
@@ -520,9 +519,9 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
    * @param {string} [params.attachmentType] - Type of attachment. The default attachment type is "isx".
    * @param {string} [params.fileName] - Name of the input file (if exists).
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.ImportResponse>>}
+   * @returns {Promise<DatastageV3.Response<DatastageV3.ImportResponse>>}
    */
-  public migrationCreate(params: IbmApiForDataFlowServiceV3.MigrationCreateParams): Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.ImportResponse>> {
+  public migrationCreate(params: DatastageV3.MigrationCreateParams): Promise<DatastageV3.Response<DatastageV3.ImportResponse>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['body'];
 
@@ -541,7 +540,7 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
       'file_name': _params.fileName
     };
 
-    const sdkHeaders = getSdkHeaders(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_NAME, 'v3', 'migrationCreate');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'migrationCreate');
 
     const parameters = {
       options: {
@@ -562,20 +561,19 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
   };
 
   /**
-   * Get the status of a previous import request.
+   * Cancel a previous import request.
    *
-   * Gets the status of an import request. The status field in the response object indicates if the given import is
-   * completed, in progress, or failed. Detailed status information about each imported data flow is also contained in
-   * the response object.
+   * Cancel a previous import request. Use GET /v3/migration/imports/{import_id} to obtain the current status of the
+   * import, including whether it has been cancelled.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.importId - Unique ID of the import request.
    * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
    * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.ImportResponse>>}
+   * @returns {Promise<DatastageV3.Response<DatastageV3.Empty>>}
    */
-  public migrationGet(params: IbmApiForDataFlowServiceV3.MigrationGetParams): Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.ImportResponse>> {
+  public migrationDelete(params: DatastageV3.MigrationDeleteParams): Promise<DatastageV3.Response<DatastageV3.Empty>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['importId'];
 
@@ -593,7 +591,57 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
       'import_id': _params.importId
     };
 
-    const sdkHeaders = getSdkHeaders(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_NAME, 'v3', 'migrationGet');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'migrationDelete');
+
+    const parameters = {
+      options: {
+        url: '/v3/migration/isx_imports/{import_id}',
+        method: 'DELETE',
+        qs: query,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Get the status of a previous import request.
+   *
+   * Gets the status of an import request. The status field in the response object indicates if the given import is
+   * completed, in progress, or failed. Detailed status information about each imported data flow is also contained in
+   * the response object.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.importId - Unique ID of the import request.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
+   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DatastageV3.Response<DatastageV3.ImportResponse>>}
+   */
+  public migrationGet(params: DatastageV3.MigrationGetParams): Promise<DatastageV3.Response<DatastageV3.ImportResponse>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['importId'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const query = {
+      'catalog_id': _params.catalogId,
+      'project_id': _params.projectId
+    };
+
+    const path = {
+      'import_id': _params.importId
+    };
+
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'migrationGet');
 
     const parameters = {
       options: {
@@ -612,62 +660,13 @@ class IbmApiForDataFlowServiceV3 extends BaseService {
     return this.createRequest(parameters);
   };
 
-  /**
-   * Cancel a previous import request.
-   *
-   * Cancel a previous import request. Use GET /v3/migration/imports/{import_id} to obtain the current status of the
-   * import, including whether it has been cancelled.
-   *
-   * @param {Object} params - The parameters to send to the service.
-   * @param {string} params.importId - Unique ID of the import request.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
-   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
-   * @returns {Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.Empty>>}
-   */
-  public migrationDelete(params: IbmApiForDataFlowServiceV3.MigrationDeleteParams): Promise<IbmApiForDataFlowServiceV3.Response<IbmApiForDataFlowServiceV3.Empty>> {
-    const _params = Object.assign({}, params);
-    const requiredParams = ['importId'];
-
-    const missingParams = getMissingParams(_params, requiredParams);
-    if (missingParams) {
-      return Promise.reject(missingParams);
-    }
-
-    const query = {
-      'catalog_id': _params.catalogId,
-      'project_id': _params.projectId
-    };
-
-    const path = {
-      'import_id': _params.importId
-    };
-
-    const sdkHeaders = getSdkHeaders(IbmApiForDataFlowServiceV3.DEFAULT_SERVICE_NAME, 'v3', 'migrationDelete');
-
-    const parameters = {
-      options: {
-        url: '/v3/migration/isx_imports/{import_id}',
-        method: 'DELETE',
-        qs: query,
-        path,
-      },
-      defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
-      }),
-    };
-
-    return this.createRequest(parameters);
-  };
-
 }
 
 /*************************
  * interfaces
  ************************/
 
-namespace IbmApiForDataFlowServiceV3 {
+namespace DatastageV3 {
 
   /** An operation response. */
   export interface Response<T = any>  {
@@ -691,6 +690,21 @@ namespace IbmApiForDataFlowServiceV3 {
   /*************************
    * request interfaces
    ************************/
+
+  /** Parameters for the `datastageFlowsDelete` operation. */
+  export interface DatastageFlowsDeleteParams {
+    /** The list of DataStage flow IDs to delete. */
+    id: string[];
+    /** The ID of the catalog to use. catalog_id or project_id is required. */
+    catalogId?: string;
+    /** The ID of the project to use. catalog_id or project_id is required. */
+    projectId?: string;
+    /** Whether to stop all running data flows. Running DataStage flows must be stopped before the DataStage flows
+     *  can be deleted.
+     */
+    force?: boolean;
+    headers?: OutgoingHttpHeaders;
+  }
 
   /** Parameters for the `datastageFlowsList` operation. */
   export interface DatastageFlowsListParams {
@@ -737,21 +751,6 @@ namespace IbmApiForDataFlowServiceV3 {
       SYSTEM = 'system',
       USER = 'user',
     }
-  }
-
-  /** Parameters for the `datastageFlowsDelete` operation. */
-  export interface DatastageFlowsDeleteParams {
-    /** The list of DataStage flow IDs to delete. */
-    id: string[];
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
-    catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
-    projectId?: string;
-    /** Whether to stop all running data flows. Running DataStage flows must be stopped before the DataStage flows
-     *  can be deleted.
-     */
-    force?: boolean;
-    headers?: OutgoingHttpHeaders;
   }
 
   /** Parameters for the `datastageFlowsGet` operation. */
@@ -858,8 +857,8 @@ namespace IbmApiForDataFlowServiceV3 {
     }
   }
 
-  /** Parameters for the `migrationGet` operation. */
-  export interface MigrationGetParams {
+  /** Parameters for the `migrationDelete` operation. */
+  export interface MigrationDeleteParams {
     /** Unique ID of the import request. */
     importId: string;
     /** The ID of the catalog to use. catalog_id or project_id is required. */
@@ -869,8 +868,8 @@ namespace IbmApiForDataFlowServiceV3 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `migrationDelete` operation. */
-  export interface MigrationDeleteParams {
+  /** Parameters for the `migrationGet` operation. */
+  export interface MigrationGetParams {
     /** Unique ID of the import request. */
     importId: string;
     /** The ID of the catalog to use. catalog_id or project_id is required. */
@@ -886,12 +885,12 @@ namespace IbmApiForDataFlowServiceV3 {
 
   /** The rules of visibility for an asset. */
   export interface AssetEntityROV {
+    /** An array of members belonging to AssetEntityROV. */
+    members?: string[];
     /** The values for mode are 0 (public, searchable and viewable by all), 8 (private, searchable by all, but not
      *  viewable unless view permission given) or 16 (hidden, only searchable by users with view permissions).
      */
     mode?: number;
-    /** An array of members belonging to AssetEntityROV. */
-    members?: string[];
   }
 
   /** System metadata about an asset. */
@@ -908,44 +907,44 @@ namespace IbmApiForDataFlowServiceV3 {
     create_time?: string;
     /** The IAM ID of the user that created the asset. */
     creator_id?: string;
+    /** The description of the asset. */
+    description?: string;
     /** URL that can be used to get the asset. */
     href?: string;
     /** name of the asset. */
     name?: string;
     /** origin of the asset. */
     origin_country?: string;
-    /** size of the asset. */
-    size?: number;
     /** The ID of the project which contains the asset. catalog_id or project_id is required. */
     project_id?: string;
     /** This is a unique string that uniquely identifies an asset. */
     resource_key?: string;
-    /** The description of the asset. */
-    description?: string;
-    /** A list of tags that can be used to identify different types of data flow. */
-    tags?: string[];
+    /** size of the asset. */
+    size?: number;
     /** Custom data to be associated with a given object. */
     source_system?: JsonObject;
+    /** A list of tags that can be used to identify different types of data flow. */
+    tags?: string[];
     /** Metadata usage information about an asset. */
     usage?: AssetSystemMetadataUsage;
   }
 
   /** Metadata usage information about an asset. */
   export interface AssetSystemMetadataUsage {
-    /** The timestamp when the asset was last modified (in format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
-     *  matching the date-time format as specified by RFC 3339).
-     */
-    last_modification_time: string;
-    /** The IAM ID of the user that last modified the asset. */
-    last_modifier_id: string;
+    /** Number of times this asset has been accessed. */
+    access_count: number;
     /** The timestamp when the asset was last accessed (in format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
      *  matching the date-time format as specified by RFC 3339).
      */
     last_access_time: string;
     /** The IAM ID of the user that last accessed the asset. */
     last_accessor_id: string;
-    /** Number of times this asset has been accessed. */
-    access_count: number;
+    /** The timestamp when the asset was last modified (in format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
+     *  matching the date-time format as specified by RFC 3339).
+     */
+    last_modification_time: string;
+    /** The IAM ID of the user that last modified the asset. */
+    last_modifier_id: string;
   }
 
   /** A page from a collection of DataStage flows. */
@@ -955,45 +954,45 @@ namespace IbmApiForDataFlowServiceV3 {
     /** URI of a resource. */
     first?: HrefModel;
     /** URI of a resource. */
-    prev?: HrefModel;
-    /** URI of a resource. */
-    next?: HrefModel;
-    /** URI of a resource. */
     last?: HrefModel;
     /** The number of data flows requested to be returned. */
     limit?: number;
+    /** URI of a resource. */
+    next?: HrefModel;
+    /** URI of a resource. */
+    prev?: HrefModel;
     /** The total number of DataStage flows available. */
     total_count?: number;
   }
 
   /** An import error object describe an import problem specific to a particular data flow. */
   export interface DataImportError {
-    /** error type. */
-    type: string;
-    /** error object name. */
-    name: string;
     /** additional error text. */
     description?: string;
+    /** error object name. */
+    name: string;
+    /** error type. */
+    type: string;
   }
 
   /** A DataStage flow model that defines physical source(s), physical target(s) and an optional pipeline containing operations to apply to source(s). */
   export interface DataIntgFlow {
-    /** System metadata about an asset. */
-    metadata?: AssetSystemMetadata;
+    /** Metadata information for datastage flow. */
+    attachments?: JsonObject[];
     /** The underlying DataStage flow definition. */
     entity?: DataIntgFlowEntity;
-    /** Pipeline flow from BFF as an attachment. */
-    attachments?: JsonObject;
+    /** System metadata about an asset. */
+    metadata?: AssetSystemMetadata;
   }
 
   /** The underlying DataStage flow definition. */
   export interface DataIntgFlowEntity {
     /** Asset type object. */
     data_intg_flow?: JsonObject;
-    /** Lock information for a DataStage flow asset. */
-    lock?: DataIntgFlowLock;
     /** The description of the DataStage flow. */
     description?: string;
+    /** Lock information for a DataStage flow asset. */
+    lock?: DataIntgFlowLock;
     /** The name of the DataStage flow. */
     name?: string;
     /** The rules of visibility for an asset. */
@@ -1004,12 +1003,22 @@ namespace IbmApiForDataFlowServiceV3 {
     sub_type?: string;
   }
 
+  /** A pipeline JSON containing operations to apply to source(s). */
+  export interface DataIntgFlowJson {
+    /** Pipeline flow to be stored. */
+    attachments?: PipelineJson;
+    /** The underlying DataStage flow definition. */
+    entity?: DataIntgFlowEntity;
+    /** System metadata about an asset. */
+    metadata?: AssetSystemMetadata;
+  }
+
   /** Lock information for a DataStage flow asset. */
   export interface DataIntgFlowLock {
-    /** Metadata information for a DataStage lock object. */
-    metadata?: DataIntgFlowLockMetadata;
     /** Entity information for a DataStage lock object. */
     entity?: DataIntgFlowLockEntity;
+    /** Metadata information for a DataStage lock object. */
+    metadata?: DataIntgFlowLockMetadata;
   }
 
   /** Entity information for a DataStage lock object. */
@@ -1028,10 +1037,10 @@ namespace IbmApiForDataFlowServiceV3 {
 
   /** Describes the compile response model. */
   export interface FlowCompileResponse {
-    /** Compile response type. e.g. ok or error. */
-    type?: string;
     /** Compile result for DataStage flow. */
     message?: JsonObject;
+    /** Compile response type. e.g. ok or error. */
+    type?: string;
   }
 
   /** URI of a resource. */
@@ -1042,64 +1051,44 @@ namespace IbmApiForDataFlowServiceV3 {
 
   /** Import statistics. total = imported (including renamed and replaced) + skipped + failed + deprecated + unsupported + pending. */
   export interface ImportCount {
-    /** Total number of data flows to be imported. */
-    total: number;
+    /** Total number of data connections. */
+    connections_total?: number;
+    /** Total number of deprecated resources in the import file. */
+    deprecated: number;
+    /** Total number of data flows that cannot be imported due to import errors. */
+    failed: number;
     /** Total number of data flows successfully imported. */
     imported: number;
+    /** Total number of parameter sets. */
+    parameter_sets_total?: number;
+    /** Total number of data flows that have not been processed. */
+    pending: number;
+    /** Total number of parallel job containers. */
+    px_containers_total?: number;
     /** Total number of data flows successfully imported and renamed due to a name conflict. The renamed count is
      *  included in the imported count.
      */
     renamed: number;
-    /** Total number of data flows skipped due to name conflicts. The skipped count is not included in the failed
-     *  count or imported count.
-     */
-    skipped: number;
     /** Total number of existing data flows replaced by imported flows. The replaced count is included in the
      *  imported count.
      */
     replaced: number;
-    /** Total number of data flows that cannot be imported due to import errors. */
-    failed: number;
-    /** Total number of deprecated resources in the import file. */
-    deprecated: number;
+    /** Total number of sequence jobs. */
+    sequence_jobs_total?: number;
+    /** Total number of data flows skipped due to name conflicts. The skipped count is not included in the failed
+     *  count or imported count.
+     */
+    skipped: number;
+    /** Total number of table definitions. */
+    table_definitions_total?: number;
+    /** Total number of data flows to be imported. */
+    total: number;
     /** Total number of unsupported resources in the import file. */
     unsupported: number;
-    /** Total number of data flows that have not been processed. */
-    pending: number;
-    /** Total number of data connections. */
-    connections_total: number;
-    /** Total number of parameter sets. */
-    parameter_sets_total: number;
-    /** Total number of table definitions. */
-    table_definitions_total: number;
   }
 
   /** Import flow object. */
   export interface ImportFlow {
-    /** Unique id of the data flow. This field is returned only if the underlying data flow has been successfully
-     *  imported.
-     */
-    id?: string;
-    /** The ID of an existing asset this object refers to. If ref_asset_id is specified, the id field will be the
-     *  same as ref_asset_id for backward compatibility.
-     */
-    ref_asset_id?: string;
-    /** Name of the imported data flow. */
-    name: string;
-    /** Name of the data flow to be imported. */
-    original_name?: string;
-    /** type of the job or data connection in the import file. */
-    type?: string;
-    /** (deprecated) original type of the job or data flow in the import file. */
-    job_type?: string;
-    /** Unique id of the job. This field is returned only if the corresponding job object has been successfully
-     *  created.
-     */
-    job_id?: string;
-    /** Job name. This field is returned only if the corresponding job object has been successfully created. */
-    job_name?: string;
-    /** data import status. */
-    status: string;
     /** conflict resolution status. */
     conflict_resolution_status?: string;
     /** The timestamp when the flow import is completed. In format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
@@ -1108,56 +1097,80 @@ namespace IbmApiForDataFlowServiceV3 {
     end_time?: string;
     /** The errors array report all the problems preventing the data flow from being successfully imported. */
     errors?: DataImportError[];
+    /** Unique id of the data flow. This field is returned only if the underlying data flow has been successfully
+     *  imported.
+     */
+    id?: string;
+    /** Unique id of the job. This field is returned only if the corresponding job object has been successfully
+     *  created.
+     */
+    job_id?: string;
+    /** Job name. This field is returned only if the corresponding job object has been successfully created. */
+    job_name?: string;
+    /** (deprecated) original type of the job or data flow in the import file. */
+    job_type?: string;
+    /** Name of the imported data flow. */
+    name: string;
+    /** Name of the data flow to be imported. */
+    original_name?: string;
+    /** The ID of an existing asset this object refers to. If ref_asset_id is specified, the id field will be the
+     *  same as ref_asset_id for backward compatibility.
+     */
+    ref_asset_id?: string;
+    /** data import status. */
+    status: string;
+    /** type of the job or data connection in the import file. */
+    type?: string;
     /** The warnings array report all the warnings in the data flow import operation. */
     warnings?: ImportFlowWarning[];
   }
 
   /** An import warning object describe a warning message specific to a particular data flow. */
   export interface ImportFlowWarning {
-    /** warning type. */
-    type: string;
-    /** warning object name. */
-    name: string;
     /** additional warning text. */
     description?: string;
+    /** warning object name. */
+    name: string;
+    /** warning type. */
+    type: string;
   }
 
   /** Response object of an import request. */
   export interface ImportResponse {
-    /** import response metadata. */
-    metadata: ImportResponseMetadata;
     /** import response entity. */
     entity: ImportResponseEntity;
+    /** import response metadata. */
+    metadata: ImportResponseMetadata;
   }
 
   /** import response entity. */
   export interface ImportResponseEntity {
-    /** Name of the import request. */
-    name?: string;
-    /** import status. */
-    status: string;
-    /** The timestamp when the import opearton started. In format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
-     *  matching the date-time format as specified by RFC 3339.
-     */
-    start_time?: string;
-    /** The timestamp when the import opearton completed. In format YYYY-MM-DDTHH:mm:ssZ or
-     *  YYYY-MM-DDTHH:mm:ss.sssZ, matching the date-time format as specified by RFC 3339.
-     */
-    end_time?: string;
-    /** Estimate of remaining time in seconds. */
-    remaining_time?: number;
     /** Account ID of the user who cancelled the import request. This field is required only when the status  field
      *  is "cancelled".
      */
     cancelled_by?: string;
-    /** The on_failure option used for the import. */
-    on_failure?: string;
     /** The conflict_resolution option used for the import. */
     conflict_resolution?: string;
+    /** The timestamp when the import opearton completed. In format YYYY-MM-DDTHH:mm:ssZ or
+     *  YYYY-MM-DDTHH:mm:ss.sssZ, matching the date-time format as specified by RFC 3339.
+     */
+    end_time?: string;
     /** All data flows imported or to be imported. Each ImportFlow object contains status for the individual data
      *  flow import operation.
      */
     import_data_flows: ImportFlow[];
+    /** Name of the import request. */
+    name?: string;
+    /** The on_failure option used for the import. */
+    on_failure?: string;
+    /** Estimate of remaining time in seconds. */
+    remaining_time?: number;
+    /** The timestamp when the import opearton started. In format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
+     *  matching the date-time format as specified by RFC 3339.
+     */
+    start_time?: string;
+    /** import status. */
+    status: string;
     /** Import statistics. total = imported (including renamed and replaced) + skipped + failed + deprecated +
      *  unsupported + pending.
      */
@@ -1166,69 +1179,69 @@ namespace IbmApiForDataFlowServiceV3 {
 
   /** import response metadata. */
   export interface ImportResponseMetadata {
-    /** The unique import id. */
-    id: string;
-    /** import file name. */
-    name?: string;
-    /** The URL which can be used to get the status of the import request right after it is submitted. */
-    url: string;
-    /** Project id. */
-    project_id?: string;
-    /** Project name. */
-    project_name?: string;
     /** Catalog id. */
     catalog_id?: string;
     /** The timestamp when the import API was submitted. In format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
      *  matching the date-time format as specified by RFC 3339.
      */
     created_at?: string;
+    /** Account ID of the user who submitted the import request. */
+    created_by?: string;
+    /** The unique import id. */
+    id: string;
     /** The timestamp when the import status was last updated. In format YYYY-MM-DDTHH:mm:ssZ or
      *  YYYY-MM-DDTHH:mm:ss.sssZ, matching the date-time format as specified by RFC 3339.
      */
     modified_at?: string;
-    /** Account ID of the user who submitted the import request. */
-    created_by?: string;
+    /** import file name. */
+    name?: string;
+    /** Project id. */
+    project_id?: string;
+    /** Project name. */
+    project_name?: string;
+    /** The URL which can be used to get the status of the import request right after it is submitted. */
+    url: string;
   }
 
   /** Pipeline flow to be stored. */
   export interface PipelineJson {
-    /** The document type. */
-    doc_type?: string;
-    /** Pipeline flow version. */
-    version?: string;
-    /** Refers to the JSON schema used to validate documents of this type. */
-    json_schema?: string;
-    /** Document identifier, GUID recommended. */
-    id?: string;
-    /** Reference to the primary (main) pipeline flow within the document. */
-    primary_pipeline?: string;
-    pipelines?: Pipelines[];
-    /** Array of data record schemas used in the pipeline. */
-    schemas?: JsonObject[];
-    /** Runtime information for pipeline flow. */
-    runtimes?: JsonObject[];
     /** Object containing app-specific data. */
     app_data?: JsonObject;
-    /** Parameters for the flow document. */
-    parameters?: JsonObject;
+    /** The document type. */
+    doc_type?: string;
     /** Array of parameter set references. */
     external_paramsets?: JsonObject[];
+    /** Document identifier, GUID recommended. */
+    id?: string;
+    /** Refers to the JSON schema used to validate documents of this type. */
+    json_schema?: string;
+    /** Parameters for the flow document. */
+    parameters?: JsonObject;
+    pipelines?: Pipelines[];
+    /** Reference to the primary (main) pipeline flow within the document. */
+    primary_pipeline?: string;
+    /** Runtime information for pipeline flow. */
+    runtimes?: JsonObject[];
+    /** Array of data record schemas used in the pipeline. */
+    schemas?: JsonObject[];
+    /** Pipeline flow version. */
+    version?: string;
   }
 
   /** Pipelines. */
   export interface Pipelines {
-    /** Unique identifier. */
-    id?: string;
-    /** A brief description of the DataStage flow. */
-    description?: string;
-    /** Reference to the runtime type. */
-    runtime_ref?: string;
-    /** Array of pipeline nodes. */
-    nodes?: JsonObject[];
     /** Object containing app-specific data. */
     app_data?: JsonObject;
+    /** A brief description of the DataStage flow. */
+    description?: string;
+    /** Unique identifier. */
+    id?: string;
+    /** Array of pipeline nodes. */
+    nodes?: JsonObject[];
+    /** Reference to the runtime type. */
+    runtime_ref?: string;
   }
 
 }
 
-export = IbmApiForDataFlowServiceV3;
+export = DatastageV3;
