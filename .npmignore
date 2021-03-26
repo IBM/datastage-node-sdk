@@ -7,5 +7,5 @@ tslint.json
 .eslintcache
 .eslintignore
 .github
-*.ts
+#*.ts
 !*.d.ts
