@@ -20,7 +20,7 @@ import os = require('os');
 const pkg = require('../package.json');
 
 export type SdkHeaders = {
-  'User-Agent': string;
+  'agentname': string;
 }
 
 /**
@@ -48,7 +48,7 @@ export function getSdkHeaders(serviceName: string, serviceVersion: string, opera
   const nodeVersion = process.version;
 
   const headers = {
-    'User-Agent': `${sdkName}/${sdkVersion} (lang=node.js; os.name=${osName} os.version=${osVersion} node.version=${nodeVersion})`,
+    'agentname': sdkName
   }
 
   return headers;
