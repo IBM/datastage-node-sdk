@@ -44,7 +44,7 @@ IBM Cloud services:
 
 Service Name | Import Path
 --- | ---
-<!-- [Example Service](https://cloud.ibm.com/apidocs/example-service) | datastage/example-service/v1 -->
+[DataStage](https://cloud.ibm.com/apidocs/datastage) | datastage/v3
 
 ## Prerequisites
 * You need an [IBM Cloud][ibm-cloud-onboarding] account.
