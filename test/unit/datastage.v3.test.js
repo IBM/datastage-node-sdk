@@ -99,10 +99,10 @@ describe('DatastageV3', () => {
       expect(testInstance.baseOptions.serviceUrl).toBe(DatastageV3.DEFAULT_SERVICE_URL);
     });
   });
-  describe('datastageFlowsDelete', () => {
+  describe('deleteDatastageFlows', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation datastageFlowsDelete
+        // Construct the params object for operation deleteDatastageFlows
         const id = ['testString'];
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
@@ -114,10 +114,10 @@ describe('DatastageV3', () => {
           force: force,
         };
 
-        const datastageFlowsDeleteResult = datastageService.datastageFlowsDelete(params);
+        const deleteDatastageFlowsResult = datastageService.deleteDatastageFlows(params);
 
         // all methods should return a Promise
-        expectToBePromise(datastageFlowsDeleteResult);
+        expectToBePromise(deleteDatastageFlowsResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -147,7 +147,7 @@ describe('DatastageV3', () => {
           },
         };
 
-        datastageService.datastageFlowsDelete(params);
+        datastageService.deleteDatastageFlows(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -156,7 +156,7 @@ describe('DatastageV3', () => {
       test('should enforce required parameters', async (done) => {
         let err;
         try {
-          await datastageService.datastageFlowsDelete({});
+          await datastageService.deleteDatastageFlows({});
         } catch (e) {
           err = e;
         }
@@ -166,20 +166,20 @@ describe('DatastageV3', () => {
       });
 
       test('should reject promise when required params are not given', (done) => {
-        const datastageFlowsDeletePromise = datastageService.datastageFlowsDelete();
-        expectToBePromise(datastageFlowsDeletePromise);
+        const deleteDatastageFlowsPromise = datastageService.deleteDatastageFlows();
+        expectToBePromise(deleteDatastageFlowsPromise);
 
-        datastageFlowsDeletePromise.catch((err) => {
+        deleteDatastageFlowsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
       });
     });
   });
-  describe('datastageFlowsList', () => {
+  describe('listDatastageFlows', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation datastageFlowsList
+        // Construct the params object for operation listDatastageFlows
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const sort = 'testString';
@@ -197,10 +197,10 @@ describe('DatastageV3', () => {
           entityDescription: entityDescription,
         };
 
-        const datastageFlowsListResult = datastageService.datastageFlowsList(params);
+        const listDatastageFlowsResult = datastageService.listDatastageFlows(params);
 
         // all methods should return a Promise
-        expectToBePromise(datastageFlowsListResult);
+        expectToBePromise(listDatastageFlowsResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -231,26 +231,27 @@ describe('DatastageV3', () => {
           },
         };
 
-        datastageService.datastageFlowsList(params);
+        datastageService.listDatastageFlows(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
 
       test('should not have any problems when no parameters are passed in', () => {
         // invoke the method with no parameters
-        datastageService.datastageFlowsList({});
+        datastageService.listDatastageFlows({});
         checkForSuccessfulExecution(createRequestMock);
       });
     });
   });
-  describe('datastageFlowsCreate', () => {
+  describe('createDatastageFlows', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
 
       // Pipelines
       const pipelinesModel = {
         app_data: { foo: 'bar' },
-        description: 'A test DataStage flow',
+        description: 'A test DataStage flow.',
         id: 'fa1b859a-d592-474d-b56c-2137e4efa4bc',
+        name: 'ContainerC1',
         nodes: [{ foo: 'bar' }],
         runtime_ref: 'pxOsh',
       };
@@ -272,7 +273,7 @@ describe('DatastageV3', () => {
       };
 
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation datastageFlowsCreate
+        // Construct the params object for operation createDatastageFlows
         const dataIntgFlowName = 'testString';
         const pipelineFlows = pipelineJsonModel;
         const catalogId = 'testString';
@@ -286,10 +287,10 @@ describe('DatastageV3', () => {
           assetCategory: assetCategory,
         };
 
-        const datastageFlowsCreateResult = datastageService.datastageFlowsCreate(params);
+        const createDatastageFlowsResult = datastageService.createDatastageFlows(params);
 
         // all methods should return a Promise
-        expectToBePromise(datastageFlowsCreateResult);
+        expectToBePromise(createDatastageFlowsResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -320,7 +321,7 @@ describe('DatastageV3', () => {
           },
         };
 
-        datastageService.datastageFlowsCreate(params);
+        datastageService.createDatastageFlows(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -329,7 +330,7 @@ describe('DatastageV3', () => {
       test('should enforce required parameters', async (done) => {
         let err;
         try {
-          await datastageService.datastageFlowsCreate({});
+          await datastageService.createDatastageFlows({});
         } catch (e) {
           err = e;
         }
@@ -339,20 +340,20 @@ describe('DatastageV3', () => {
       });
 
       test('should reject promise when required params are not given', (done) => {
-        const datastageFlowsCreatePromise = datastageService.datastageFlowsCreate();
-        expectToBePromise(datastageFlowsCreatePromise);
+        const createDatastageFlowsPromise = datastageService.createDatastageFlows();
+        expectToBePromise(createDatastageFlowsPromise);
 
-        datastageFlowsCreatePromise.catch((err) => {
+        createDatastageFlowsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
       });
     });
   });
-  describe('datastageFlowsGet', () => {
+  describe('getDatastageFlows', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation datastageFlowsGet
+        // Construct the params object for operation getDatastageFlows
         const dataIntgFlowId = 'testString';
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
@@ -362,10 +363,10 @@ describe('DatastageV3', () => {
           projectId: projectId,
         };
 
-        const datastageFlowsGetResult = datastageService.datastageFlowsGet(params);
+        const getDatastageFlowsResult = datastageService.getDatastageFlows(params);
 
         // all methods should return a Promise
-        expectToBePromise(datastageFlowsGetResult);
+        expectToBePromise(getDatastageFlowsResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -394,7 +395,7 @@ describe('DatastageV3', () => {
           },
         };
 
-        datastageService.datastageFlowsGet(params);
+        datastageService.getDatastageFlows(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -403,7 +404,7 @@ describe('DatastageV3', () => {
       test('should enforce required parameters', async (done) => {
         let err;
         try {
-          await datastageService.datastageFlowsGet({});
+          await datastageService.getDatastageFlows({});
         } catch (e) {
           err = e;
         }
@@ -413,25 +414,26 @@ describe('DatastageV3', () => {
       });
 
       test('should reject promise when required params are not given', (done) => {
-        const datastageFlowsGetPromise = datastageService.datastageFlowsGet();
-        expectToBePromise(datastageFlowsGetPromise);
+        const getDatastageFlowsPromise = datastageService.getDatastageFlows();
+        expectToBePromise(getDatastageFlowsPromise);
 
-        datastageFlowsGetPromise.catch((err) => {
+        getDatastageFlowsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
       });
     });
   });
-  describe('datastageFlowsUpdate', () => {
+  describe('updateDatastageFlows', () => {
     describe('positive tests', () => {
       // Request models needed by this operation.
 
       // Pipelines
       const pipelinesModel = {
         app_data: { foo: 'bar' },
-        description: 'A test DataStage flow',
+        description: 'A test DataStage flow.',
         id: 'fa1b859a-d592-474d-b56c-2137e4efa4bc',
+        name: 'ContainerC1',
         nodes: [{ foo: 'bar' }],
         runtime_ref: 'pxOsh',
       };
@@ -453,7 +455,7 @@ describe('DatastageV3', () => {
       };
 
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation datastageFlowsUpdate
+        // Construct the params object for operation updateDatastageFlows
         const dataIntgFlowId = 'testString';
         const dataIntgFlowName = 'testString';
         const pipelineFlows = pipelineJsonModel;
@@ -467,10 +469,10 @@ describe('DatastageV3', () => {
           projectId: projectId,
         };
 
-        const datastageFlowsUpdateResult = datastageService.datastageFlowsUpdate(params);
+        const updateDatastageFlowsResult = datastageService.updateDatastageFlows(params);
 
         // all methods should return a Promise
-        expectToBePromise(datastageFlowsUpdateResult);
+        expectToBePromise(updateDatastageFlowsResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -503,7 +505,7 @@ describe('DatastageV3', () => {
           },
         };
 
-        datastageService.datastageFlowsUpdate(params);
+        datastageService.updateDatastageFlows(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -512,7 +514,7 @@ describe('DatastageV3', () => {
       test('should enforce required parameters', async (done) => {
         let err;
         try {
-          await datastageService.datastageFlowsUpdate({});
+          await datastageService.updateDatastageFlows({});
         } catch (e) {
           err = e;
         }
@@ -522,20 +524,20 @@ describe('DatastageV3', () => {
       });
 
       test('should reject promise when required params are not given', (done) => {
-        const datastageFlowsUpdatePromise = datastageService.datastageFlowsUpdate();
-        expectToBePromise(datastageFlowsUpdatePromise);
+        const updateDatastageFlowsPromise = datastageService.updateDatastageFlows();
+        expectToBePromise(updateDatastageFlowsPromise);
 
-        datastageFlowsUpdatePromise.catch((err) => {
+        updateDatastageFlowsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
       });
     });
   });
-  describe('datastageFlowsClone', () => {
+  describe('cloneDatastageFlows', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation datastageFlowsClone
+        // Construct the params object for operation cloneDatastageFlows
         const dataIntgFlowId = 'testString';
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
@@ -545,10 +547,10 @@ describe('DatastageV3', () => {
           projectId: projectId,
         };
 
-        const datastageFlowsCloneResult = datastageService.datastageFlowsClone(params);
+        const cloneDatastageFlowsResult = datastageService.cloneDatastageFlows(params);
 
         // all methods should return a Promise
-        expectToBePromise(datastageFlowsCloneResult);
+        expectToBePromise(cloneDatastageFlowsResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -577,7 +579,7 @@ describe('DatastageV3', () => {
           },
         };
 
-        datastageService.datastageFlowsClone(params);
+        datastageService.cloneDatastageFlows(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -586,7 +588,7 @@ describe('DatastageV3', () => {
       test('should enforce required parameters', async (done) => {
         let err;
         try {
-          await datastageService.datastageFlowsClone({});
+          await datastageService.cloneDatastageFlows({});
         } catch (e) {
           err = e;
         }
@@ -596,20 +598,20 @@ describe('DatastageV3', () => {
       });
 
       test('should reject promise when required params are not given', (done) => {
-        const datastageFlowsClonePromise = datastageService.datastageFlowsClone();
-        expectToBePromise(datastageFlowsClonePromise);
+        const cloneDatastageFlowsPromise = datastageService.cloneDatastageFlows();
+        expectToBePromise(cloneDatastageFlowsPromise);
 
-        datastageFlowsClonePromise.catch((err) => {
+        cloneDatastageFlowsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
       });
     });
   });
-  describe('datastageFlowsCompile', () => {
+  describe('compileDatastageFlows', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation datastageFlowsCompile
+        // Construct the params object for operation compileDatastageFlows
         const dataIntgFlowId = 'testString';
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
@@ -621,10 +623,10 @@ describe('DatastageV3', () => {
           runtimeType: runtimeType,
         };
 
-        const datastageFlowsCompileResult = datastageService.datastageFlowsCompile(params);
+        const compileDatastageFlowsResult = datastageService.compileDatastageFlows(params);
 
         // all methods should return a Promise
-        expectToBePromise(datastageFlowsCompileResult);
+        expectToBePromise(compileDatastageFlowsResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -654,7 +656,7 @@ describe('DatastageV3', () => {
           },
         };
 
-        datastageService.datastageFlowsCompile(params);
+        datastageService.compileDatastageFlows(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -663,7 +665,7 @@ describe('DatastageV3', () => {
       test('should enforce required parameters', async (done) => {
         let err;
         try {
-          await datastageService.datastageFlowsCompile({});
+          await datastageService.compileDatastageFlows({});
         } catch (e) {
           err = e;
         }
@@ -673,20 +675,530 @@ describe('DatastageV3', () => {
       });
 
       test('should reject promise when required params are not given', (done) => {
-        const datastageFlowsCompilePromise = datastageService.datastageFlowsCompile();
-        expectToBePromise(datastageFlowsCompilePromise);
+        const compileDatastageFlowsPromise = datastageService.compileDatastageFlows();
+        expectToBePromise(compileDatastageFlowsPromise);
 
-        datastageFlowsCompilePromise.catch((err) => {
+        compileDatastageFlowsPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
       });
     });
   });
-  describe('migrationCreate', () => {
+  describe('deleteDatastageSubflows', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation migrationCreate
+        // Construct the params object for operation deleteDatastageSubflows
+        const id = ['testString'];
+        const catalogId = 'testString';
+        const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
+        const params = {
+          id: id,
+          catalogId: catalogId,
+          projectId: projectId,
+        };
+
+        const deleteDatastageSubflowsResult = datastageService.deleteDatastageSubflows(params);
+
+        // all methods should return a Promise
+        expectToBePromise(deleteDatastageSubflowsResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/v3/data_intg_flows/subflows', 'DELETE');
+        const expectedAccept = undefined;
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.qs['id']).toEqual(id);
+        expect(options.qs['catalog_id']).toEqual(catalogId);
+        expect(options.qs['project_id']).toEqual(projectId);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const id = ['testString'];
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          id,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        datastageService.deleteDatastageSubflows(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async (done) => {
+        let err;
+        try {
+          await datastageService.deleteDatastageSubflows({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', (done) => {
+        const deleteDatastageSubflowsPromise = datastageService.deleteDatastageSubflows();
+        expectToBePromise(deleteDatastageSubflowsPromise);
+
+        deleteDatastageSubflowsPromise.catch((err) => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
+  describe('listDatastageSubflows', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation listDatastageSubflows
+        const catalogId = 'testString';
+        const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
+        const sort = 'testString';
+        const start = 'testString';
+        const limit = 100;
+        const entityName = 'testString';
+        const entityDescription = 'testString';
+        const params = {
+          catalogId: catalogId,
+          projectId: projectId,
+          sort: sort,
+          start: start,
+          limit: limit,
+          entityName: entityName,
+          entityDescription: entityDescription,
+        };
+
+        const listDatastageSubflowsResult = datastageService.listDatastageSubflows(params);
+
+        // all methods should return a Promise
+        expectToBePromise(listDatastageSubflowsResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/v3/data_intg_flows/subflows', 'GET');
+        const expectedAccept = 'application/json;charset=utf-8';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.qs['catalog_id']).toEqual(catalogId);
+        expect(options.qs['project_id']).toEqual(projectId);
+        expect(options.qs['sort']).toEqual(sort);
+        expect(options.qs['start']).toEqual(start);
+        expect(options.qs['limit']).toEqual(limit);
+        expect(options.qs['entity.name']).toEqual(entityName);
+        expect(options.qs['entity.description']).toEqual(entityDescription);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        datastageService.listDatastageSubflows(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+
+      test('should not have any problems when no parameters are passed in', () => {
+        // invoke the method with no parameters
+        datastageService.listDatastageSubflows({});
+        checkForSuccessfulExecution(createRequestMock);
+      });
+    });
+  });
+  describe('createDatastageSubflows', () => {
+    describe('positive tests', () => {
+      // Request models needed by this operation.
+
+      // Pipelines
+      const pipelinesModel = {
+        app_data: { foo: 'bar' },
+        description: 'A test DataStage flow.',
+        id: 'fa1b859a-d592-474d-b56c-2137e4efa4bc',
+        name: 'ContainerC1',
+        nodes: [{ foo: 'bar' }],
+        runtime_ref: 'pxOsh',
+      };
+
+      // PipelineJson
+      const pipelineJsonModel = {
+        app_data: { foo: 'bar' },
+        doc_type: 'pipeline',
+        external_paramsets: [{ foo: 'bar' }],
+        id: '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff',
+        json_schema:
+          'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json',
+        parameters: { foo: 'bar' },
+        pipelines: [pipelinesModel],
+        primary_pipeline: 'fa1b859a-d592-474d-b56c-2137e4efa4bc',
+        runtimes: [{ foo: 'bar' }],
+        schemas: [{ foo: 'bar' }],
+        version: '3.0',
+      };
+
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation createDatastageSubflows
+        const dataIntgSubflowName = 'testString';
+        const pipelineFlows = pipelineJsonModel;
+        const catalogId = 'testString';
+        const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
+        const assetCategory = 'system';
+        const params = {
+          dataIntgSubflowName: dataIntgSubflowName,
+          pipelineFlows: pipelineFlows,
+          catalogId: catalogId,
+          projectId: projectId,
+          assetCategory: assetCategory,
+        };
+
+        const createDatastageSubflowsResult = datastageService.createDatastageSubflows(params);
+
+        // all methods should return a Promise
+        expectToBePromise(createDatastageSubflowsResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/v3/data_intg_flows/subflows', 'POST');
+        const expectedAccept = 'application/json;charset=utf-8';
+        const expectedContentType = 'application/json;charset=utf-8';
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.body['pipeline_flows']).toEqual(pipelineFlows);
+        expect(options.qs['data_intg_subflow_name']).toEqual(dataIntgSubflowName);
+        expect(options.qs['catalog_id']).toEqual(catalogId);
+        expect(options.qs['project_id']).toEqual(projectId);
+        expect(options.qs['asset_category']).toEqual(assetCategory);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const dataIntgSubflowName = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          dataIntgSubflowName,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        datastageService.createDatastageSubflows(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async (done) => {
+        let err;
+        try {
+          await datastageService.createDatastageSubflows({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', (done) => {
+        const createDatastageSubflowsPromise = datastageService.createDatastageSubflows();
+        expectToBePromise(createDatastageSubflowsPromise);
+
+        createDatastageSubflowsPromise.catch((err) => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
+  describe('getDatastageSubflows', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation getDatastageSubflows
+        const dataIntgSubflowId = 'testString';
+        const catalogId = 'testString';
+        const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
+        const params = {
+          dataIntgSubflowId: dataIntgSubflowId,
+          catalogId: catalogId,
+          projectId: projectId,
+        };
+
+        const getDatastageSubflowsResult = datastageService.getDatastageSubflows(params);
+
+        // all methods should return a Promise
+        expectToBePromise(getDatastageSubflowsResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/v3/data_intg_flows/subflows/{data_intg_subflow_id}', 'GET');
+        const expectedAccept = 'application/json;charset=utf-8';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.qs['catalog_id']).toEqual(catalogId);
+        expect(options.qs['project_id']).toEqual(projectId);
+        expect(options.path['data_intg_subflow_id']).toEqual(dataIntgSubflowId);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const dataIntgSubflowId = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          dataIntgSubflowId,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        datastageService.getDatastageSubflows(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async (done) => {
+        let err;
+        try {
+          await datastageService.getDatastageSubflows({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', (done) => {
+        const getDatastageSubflowsPromise = datastageService.getDatastageSubflows();
+        expectToBePromise(getDatastageSubflowsPromise);
+
+        getDatastageSubflowsPromise.catch((err) => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
+  describe('updateDatastageSubflows', () => {
+    describe('positive tests', () => {
+      // Request models needed by this operation.
+
+      // Pipelines
+      const pipelinesModel = {
+        app_data: { foo: 'bar' },
+        description: 'A test DataStage flow.',
+        id: 'fa1b859a-d592-474d-b56c-2137e4efa4bc',
+        name: 'ContainerC1',
+        nodes: [{ foo: 'bar' }],
+        runtime_ref: 'pxOsh',
+      };
+
+      // PipelineJson
+      const pipelineJsonModel = {
+        app_data: { foo: 'bar' },
+        doc_type: 'pipeline',
+        external_paramsets: [{ foo: 'bar' }],
+        id: '84c2b6fb-1dd5-4114-b4ba-9bb2cb364fff',
+        json_schema:
+          'http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json',
+        parameters: { foo: 'bar' },
+        pipelines: [pipelinesModel],
+        primary_pipeline: 'fa1b859a-d592-474d-b56c-2137e4efa4bc',
+        runtimes: [{ foo: 'bar' }],
+        schemas: [{ foo: 'bar' }],
+        version: '3.0',
+      };
+
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation updateDatastageSubflows
+        const dataIntgSubflowId = 'testString';
+        const dataIntgSubflowName = 'testString';
+        const pipelineFlows = pipelineJsonModel;
+        const catalogId = 'testString';
+        const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
+        const params = {
+          dataIntgSubflowId: dataIntgSubflowId,
+          dataIntgSubflowName: dataIntgSubflowName,
+          pipelineFlows: pipelineFlows,
+          catalogId: catalogId,
+          projectId: projectId,
+        };
+
+        const updateDatastageSubflowsResult = datastageService.updateDatastageSubflows(params);
+
+        // all methods should return a Promise
+        expectToBePromise(updateDatastageSubflowsResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(options, '/v3/data_intg_flows/subflows/{data_intg_subflow_id}', 'PUT');
+        const expectedAccept = 'application/json;charset=utf-8';
+        const expectedContentType = 'application/json;charset=utf-8';
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.body['pipeline_flows']).toEqual(pipelineFlows);
+        expect(options.qs['data_intg_subflow_name']).toEqual(dataIntgSubflowName);
+        expect(options.qs['catalog_id']).toEqual(catalogId);
+        expect(options.qs['project_id']).toEqual(projectId);
+        expect(options.path['data_intg_subflow_id']).toEqual(dataIntgSubflowId);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const dataIntgSubflowId = 'testString';
+        const dataIntgSubflowName = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          dataIntgSubflowId,
+          dataIntgSubflowName,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        datastageService.updateDatastageSubflows(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async (done) => {
+        let err;
+        try {
+          await datastageService.updateDatastageSubflows({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', (done) => {
+        const updateDatastageSubflowsPromise = datastageService.updateDatastageSubflows();
+        expectToBePromise(updateDatastageSubflowsPromise);
+
+        updateDatastageSubflowsPromise.catch((err) => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
+  describe('cloneDatastageSubflows', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation cloneDatastageSubflows
+        const dataIntgSubflowId = 'testString';
+        const catalogId = 'testString';
+        const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
+        const params = {
+          dataIntgSubflowId: dataIntgSubflowId,
+          catalogId: catalogId,
+          projectId: projectId,
+        };
+
+        const cloneDatastageSubflowsResult = datastageService.cloneDatastageSubflows(params);
+
+        // all methods should return a Promise
+        expectToBePromise(cloneDatastageSubflowsResult);
+
+        // assert that create request was called
+        expect(createRequestMock).toHaveBeenCalledTimes(1);
+
+        const options = getOptions(createRequestMock);
+
+        checkUrlAndMethod(
+          options,
+          '/v3/data_intg_flows/subflows/{data_intg_subflow_id}/clone',
+          'POST'
+        );
+        const expectedAccept = 'application/json;charset=utf-8';
+        const expectedContentType = undefined;
+        checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
+        expect(options.qs['catalog_id']).toEqual(catalogId);
+        expect(options.qs['project_id']).toEqual(projectId);
+        expect(options.path['data_intg_subflow_id']).toEqual(dataIntgSubflowId);
+      });
+
+      test('should prioritize user-given headers', () => {
+        // parameters
+        const dataIntgSubflowId = 'testString';
+        const userAccept = 'fake/accept';
+        const userContentType = 'fake/contentType';
+        const params = {
+          dataIntgSubflowId,
+          headers: {
+            Accept: userAccept,
+            'Content-Type': userContentType,
+          },
+        };
+
+        datastageService.cloneDatastageSubflows(params);
+        checkMediaHeaders(createRequestMock, userAccept, userContentType);
+      });
+    });
+
+    describe('negative tests', () => {
+      test('should enforce required parameters', async (done) => {
+        let err;
+        try {
+          await datastageService.cloneDatastageSubflows({});
+        } catch (e) {
+          err = e;
+        }
+
+        expect(err.message).toMatch(/Missing required parameters/);
+        done();
+      });
+
+      test('should reject promise when required params are not given', (done) => {
+        const cloneDatastageSubflowsPromise = datastageService.cloneDatastageSubflows();
+        expectToBePromise(cloneDatastageSubflowsPromise);
+
+        cloneDatastageSubflowsPromise.catch((err) => {
+          expect(err.message).toMatch(/Missing required parameters/);
+          done();
+        });
+      });
+    });
+  });
+  describe('createMigration', () => {
+    describe('positive tests', () => {
+      test('should pass the right params to createRequest', () => {
+        // Construct the params object for operation createMigration
         const body = Buffer.from('This is a mock file.');
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
@@ -704,10 +1216,10 @@ describe('DatastageV3', () => {
           fileName: fileName,
         };
 
-        const migrationCreateResult = datastageService.migrationCreate(params);
+        const createMigrationResult = datastageService.createMigration(params);
 
         // all methods should return a Promise
-        expectToBePromise(migrationCreateResult);
+        expectToBePromise(createMigrationResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -740,7 +1252,7 @@ describe('DatastageV3', () => {
           },
         };
 
-        datastageService.migrationCreate(params);
+        datastageService.createMigration(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -749,7 +1261,7 @@ describe('DatastageV3', () => {
       test('should enforce required parameters', async (done) => {
         let err;
         try {
-          await datastageService.migrationCreate({});
+          await datastageService.createMigration({});
         } catch (e) {
           err = e;
         }
@@ -759,20 +1271,20 @@ describe('DatastageV3', () => {
       });
 
       test('should reject promise when required params are not given', (done) => {
-        const migrationCreatePromise = datastageService.migrationCreate();
-        expectToBePromise(migrationCreatePromise);
+        const createMigrationPromise = datastageService.createMigration();
+        expectToBePromise(createMigrationPromise);
 
-        migrationCreatePromise.catch((err) => {
+        createMigrationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
       });
     });
   });
-  describe('migrationDelete', () => {
+  describe('deleteMigration', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation migrationDelete
+        // Construct the params object for operation deleteMigration
         const importId = 'cc6dbbfd-810d-4f0e-b0a9-228c328aff29';
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
@@ -782,10 +1294,10 @@ describe('DatastageV3', () => {
           projectId: projectId,
         };
 
-        const migrationDeleteResult = datastageService.migrationDelete(params);
+        const deleteMigrationResult = datastageService.deleteMigration(params);
 
         // all methods should return a Promise
-        expectToBePromise(migrationDeleteResult);
+        expectToBePromise(deleteMigrationResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -814,7 +1326,7 @@ describe('DatastageV3', () => {
           },
         };
 
-        datastageService.migrationDelete(params);
+        datastageService.deleteMigration(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -823,7 +1335,7 @@ describe('DatastageV3', () => {
       test('should enforce required parameters', async (done) => {
         let err;
         try {
-          await datastageService.migrationDelete({});
+          await datastageService.deleteMigration({});
         } catch (e) {
           err = e;
         }
@@ -833,20 +1345,20 @@ describe('DatastageV3', () => {
       });
 
       test('should reject promise when required params are not given', (done) => {
-        const migrationDeletePromise = datastageService.migrationDelete();
-        expectToBePromise(migrationDeletePromise);
+        const deleteMigrationPromise = datastageService.deleteMigration();
+        expectToBePromise(deleteMigrationPromise);
 
-        migrationDeletePromise.catch((err) => {
+        deleteMigrationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
       });
     });
   });
-  describe('migrationGet', () => {
+  describe('getMigration', () => {
     describe('positive tests', () => {
       test('should pass the right params to createRequest', () => {
-        // Construct the params object for operation migrationGet
+        // Construct the params object for operation getMigration
         const importId = 'testString';
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
@@ -856,10 +1368,10 @@ describe('DatastageV3', () => {
           projectId: projectId,
         };
 
-        const migrationGetResult = datastageService.migrationGet(params);
+        const getMigrationResult = datastageService.getMigration(params);
 
         // all methods should return a Promise
-        expectToBePromise(migrationGetResult);
+        expectToBePromise(getMigrationResult);
 
         // assert that create request was called
         expect(createRequestMock).toHaveBeenCalledTimes(1);
@@ -888,7 +1400,7 @@ describe('DatastageV3', () => {
           },
         };
 
-        datastageService.migrationGet(params);
+        datastageService.getMigration(params);
         checkMediaHeaders(createRequestMock, userAccept, userContentType);
       });
     });
@@ -897,7 +1409,7 @@ describe('DatastageV3', () => {
       test('should enforce required parameters', async (done) => {
         let err;
         try {
-          await datastageService.migrationGet({});
+          await datastageService.getMigration({});
         } catch (e) {
           err = e;
         }
@@ -907,10 +1419,10 @@ describe('DatastageV3', () => {
       });
 
       test('should reject promise when required params are not given', (done) => {
-        const migrationGetPromise = datastageService.migrationGet();
-        expectToBePromise(migrationGetPromise);
+        const getMigrationPromise = datastageService.getMigration();
+        expectToBePromise(getMigrationPromise);
 
-        migrationGetPromise.catch((err) => {
+        getMigrationPromise.catch((err) => {
           expect(err.message).toMatch(/Missing required parameters/);
           done();
         });
