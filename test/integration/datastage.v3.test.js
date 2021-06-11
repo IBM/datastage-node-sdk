@@ -31,11 +31,17 @@ const describe = authHelper.prepareTests(configFile);
 
 let assetID;
 
+let subflow_assetID;
+
 let cloneID;
+
+let subflowCloneID;
 
 let importID;
 
-const dataIntgFlowName = 'nodesdkTestFlow1';
+const dataIntgFlowName = 'nodesdkTestFlow';
+
+const dataIntgSubFlowName = 'nodesdkTestSubFlow';
 
 describe('DatastageV3_integration', () => {
   const datastageService = DatastageV3.newInstance({});
@@ -49,18 +55,18 @@ describe('DatastageV3_integration', () => {
 
   jest.setTimeout(timeout);
 
-  test('datastageFlowsList()', async () => {
+  test('listDatastageFlows()', async () => {
     const params = {
       projectId: projectID,
       sort: 'name',
       limit: 100,
     };
 
-    const res = await datastageService.datastageFlowsList(params);
+    const res = await datastageService.listDatastageFlows(params);
     expect(res).toBeDefined();
     expect(res.result).toBeDefined();
   });
-  test('datastageFlowsCreate()', async () => {
+  test('createDatastageFlows()', async () => {
     // Request models needed by this operation.
     const pipelineJsonFromFile = JSON.parse(fs.readFileSync('testInput/rowgen_peek.json', 'utf-8'));
 
@@ -71,22 +77,22 @@ describe('DatastageV3_integration', () => {
       assetCategory: 'system',
     };
 
-    const res = await datastageService.datastageFlowsCreate(params);
+    const res = await datastageService.createDatastageFlows(params);
     assetID = res.result.metadata.asset_id;
     expect(res).toBeDefined();
     expect(res.result).toBeDefined();
   });
-  test('datastageFlowsGet()', async () => {
+  test('getDatastageFlows()', async () => {
     const params = {
       dataIntgFlowId: assetID,
       projectId: projectID,
     };
 
-    const res = await datastageService.datastageFlowsGet(params);
+    const res = await datastageService.getDatastageFlows(params);
     expect(res).toBeDefined();
     expect(res.result).toBeDefined();
   });
-  test('datastageFlowsUpdate()', async () => {
+  test('updateDatastageFlows()', async () => {
     // Request models needed by this operation.
     const pipelineJsonFromFile = JSON.parse(
       fs.readFileSync('testInput/rowgen_peek_update.json', 'utf-8')
@@ -99,33 +105,98 @@ describe('DatastageV3_integration', () => {
       assetCategory: 'system',
     };
 
-    const res = await datastageService.datastageFlowsUpdate(params);
+    const res = await datastageService.updateDatastageFlows(params);
     expect(res).toBeDefined();
     expect(res.result).toBeDefined();
   });
 
-  test('datastageFlowsClone()', async () => {
+  test('cloneDatastageFlows()', async () => {
     const params = {
       dataIntgFlowId: assetID,
       projectId: projectID,
     };
 
-    const res = await datastageService.datastageFlowsClone(params);
+    const res = await datastageService.cloneDatastageFlows(params);
     cloneID = res.result.metadata.asset_id;
     expect(res).toBeDefined();
     expect(res.result).toBeDefined();
   });
-  test('datastageFlowsCompile()', async () => {
+  test('compileDatastageFlows()', async () => {
     const params = {
       dataIntgFlowId: assetID,
       projectId: projectID,
     };
 
-    const res = await datastageService.datastageFlowsCompile(params);
+    const res = await datastageService.compileDatastageFlows(params);
     expect(res).toBeDefined();
     expect(res.result).toBeDefined();
   });
-  test('migrationCreate()', async () => {
+  test('listDatastageSubflows()', async () => {
+    const params = {
+      projectId: projectID,
+      sort: 'name',
+      limit: 100
+    };
+
+    const res = await datastageService.listDatastageSubflows(params);
+    expect(res).toBeDefined();
+    expect(res.result).toBeDefined();
+  });
+  test('createDatastageSubflows()', async () => {
+    // Request models needed by this operation.
+    const pipelineJsonFromFile = JSON.parse(fs.readFileSync('testInput/subflow_sort.json', 'utf-8'));
+
+    const params = {
+      dataIntgSubflowName: dataIntgSubFlowName,
+      pipelineFlows: pipelineJsonFromFile,
+      projectId: projectID,
+      assetCategory: 'system',
+    };
+
+    const res = await datastageService.createDatastageSubflows(params);
+    subflow_assetID = res.result.metadata.asset_id;
+    expect(res).toBeDefined();
+    expect(res.result).toBeDefined();
+  });
+  test('getDatastageSubflows()', async () => {
+    const params = {
+      dataIntgSubflowId: subflow_assetID,
+      projectId: projectID,
+    };
+
+    const res = await datastageService.getDatastageSubflows(params);
+    expect(res).toBeDefined();
+    expect(res.result).toBeDefined();
+  });
+  test('updateDatastageSubFlows()', async () => {
+    // Request models needed by this operation.
+    const pipelineJsonFromFile = JSON.parse(
+      fs.readFileSync('testInput/subflow_sort_update.json', 'utf-8')
+    );
+    const params = {
+      dataIntgSubflowId: subflow_assetID,
+      dataIntgSubflowName: dataIntgSubFlowName,
+      pipelineFlows: pipelineJsonFromFile,
+      projectId: projectID,
+      assetCategory: 'system',
+    };
+
+    const res = await datastageService.updateDatastageSubflows(params);
+    expect(res).toBeDefined();
+    expect(res.result).toBeDefined();
+  });
+  test('cloneDatastageSubflows()', async () => {
+    const params = {
+      dataIntgSubflowId: subflow_assetID,
+      projectId: projectID,
+    };
+
+    const res = await datastageService.cloneDatastageSubflows(params);
+    subflowCloneID = res.result.metadata.asset_id;
+    expect(res).toBeDefined();
+    expect(res.result).toBeDefined();
+  });
+  test('createMigration()', async () => {
     const params = {
       body: Buffer.from(fs.readFileSync('testInput/rowgen_peek.isx')),
       projectId: projectID,
@@ -134,40 +205,50 @@ describe('DatastageV3_integration', () => {
       attachmentType: 'isx',
       fileName: 'rowgen_peek.isx',
     };
-    const res = await datastageService.migrationCreate(params);
-    
+    const res = await datastageService.createMigration(params);
+
     importID = res.result.metadata.id;
     expect(res).toBeDefined();
     expect(res.result).toBeDefined();
   });
-  test('migrationGet()', async () => {
+  test('getMigration()', async () => {
     const params = {
       importId: importID,
       projectId: projectID,
     };
 
-    const res = await datastageService.migrationGet(params);
+    const res = await datastageService.getMigration(params);
     expect(res).toBeDefined();
     expect(res.result).toBeDefined();
   });
-  test('migrationDelete()', async () => {
+  test('deleteMigration()', async () => {
     const params = {
       importId: importID,
       projectId: projectID,
     };
 
-    const res = await datastageService.migrationDelete(params);
+    const res = await datastageService.deleteMigration(params);
     expect(res).toBeDefined();
     expect(res.result).toBeDefined();
   });
-  test('datastageFlowsDelete()', async () => {
+  test('deleteDatastageFlows()', async () => {
     const params = {
-      id: [assetID,cloneID],
+      id: [assetID, cloneID],
       projectId: projectID,
       force: true,
     };
 
-    const res = await datastageService.datastageFlowsDelete(params);
+    const res = await datastageService.deleteDatastageFlows(params);
+    expect(res).toBeDefined();
+    expect(res.result).toBeDefined();
+  });
+  test('deleteDatastageSubflows()', async () => {
+    const params = {
+      id: [subflow_assetID, subflowCloneID],
+      projectId: projectID,
+    };
+
+    const res = await datastageService.deleteDatastageSubflows(params);
     expect(res).toBeDefined();
     expect(res.result).toBeDefined();
   });

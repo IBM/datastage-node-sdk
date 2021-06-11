@@ -93,7 +93,7 @@ class DatastageV3 extends BaseService {
   /**
    * Delete DataStage flows.
    *
-   * Deletes the specified data flows in a project or catalog (either project_id or catalog_id must be set).
+   * Deletes the specified data flows in a project or catalog (either `project_id` or `catalog_id` must be set).
    *
    * If the deletion of the data flows and their runs will take some time to finish, then a 202 response will be
    * returned and the deletion will continue asynchronously.
@@ -104,14 +104,14 @@ class DatastageV3 extends BaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string[]} params.id - The list of DataStage flow IDs to delete.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
    * @param {boolean} [params.force] - Whether to stop all running data flows. Running DataStage flows must be stopped
    * before the DataStage flows can be deleted.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.Empty>>}
    */
-  public datastageFlowsDelete(params: DatastageV3.DatastageFlowsDeleteParams): Promise<DatastageV3.Response<DatastageV3.Empty>> {
+  public deleteDatastageFlows(params: DatastageV3.DeleteDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.Empty>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['id'];
 
@@ -127,7 +127,7 @@ class DatastageV3 extends BaseService {
       'force': _params.force
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsDelete');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'deleteDatastageFlows');
 
     const parameters = {
       options: {
@@ -153,26 +153,26 @@ class DatastageV3 extends BaseService {
    *
    * | Field                    | Match type   | Example                                 |
    * | ------------------------ | ------------ | --------------------------------------- |
-   * | entity.name              | Equals           | entity.name=MyDataStageFlow  |
-   * | entity.name              | Starts with      | entity.name=starts:MyData  |
-   * | entity.description       | Equals           | entity.description=movement  |
-   * | entity.description       | Starts with      | entity.description=starts:data  |
+   * | `entity.name`              | Equals           | `entity.name=MyDataStageFlow`  |
+   * | `entity.name`              | Starts with      | `entity.name=starts:MyData`  |
+   * | `entity.description`       | Equals           | `entity.description=movement`  |
+   * | `entity.description`       | Starts with      | `entity.description=starts:data`  |
    *
    * To sort the results, use one or more of the parameters  described in the following section. If no sort key is
-   * specified, the results are sorted in descending order on metadata.create_time (i.e. returning the most  recently
+   * specified, the results are sorted in descending order on `metadata.create_time` (i.e. returning the most  recently
    * created data flows first).
    *
    * | Field                          | Example |
    * | ------------------------- | ----------------------------------- |
-   * | sort     | sort=+entity.name (sort by ascending name)  |
-   * | sort     | sort=-metadata.create_time (sort by descending creation time) |
+   * | sort     | `sort=+entity.name` (sort by ascending name)  |
+   * | sort     | `sort=-metadata.create_time` (sort by descending creation time) |
    *
    * Multiple sort keys can be specified by delimiting them with a comma. For example, to sort in descending order on
-   * create_time and then in ascending order on name use: sort=-metadata.create_time,+entity.name.
+   * `create_time` and then in ascending order on name use: `sort=-metadata.create_time`,`+entity.name`.
    *
    * @param {Object} [params] - The parameters to send to the service.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
    * @param {string} [params.sort] - The field to sort the results on, including whether to sort ascending (+) or
    * descending (-), for example, sort=-metadata.create_time.
    * @param {string} [params.start] - The page token indicating where to start paging from.
@@ -183,7 +183,7 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>>}
    */
-  public datastageFlowsList(params?: DatastageV3.DatastageFlowsListParams): Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>> {
+  public listDatastageFlows(params?: DatastageV3.ListDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>> {
     const _params = Object.assign({}, params);
 
     const query = {
@@ -196,7 +196,7 @@ class DatastageV3 extends BaseService {
       'entity.description': _params.entityDescription
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsList');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'listDatastageFlows');
 
     const parameters = {
       options: {
@@ -217,20 +217,20 @@ class DatastageV3 extends BaseService {
   /**
    * Create DataStage flow.
    *
-   * Creates a DataStage flow in the specified project or catalog (either project_id or catalog_id must be set). All
+   * Creates a DataStage flow in the specified project or catalog (either `project_id` or `catalog_id` must be set). All
    * subsequent calls to use the data flow must specify the project or catalog ID the data flow was created in.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.dataIntgFlowName - The data flow name.
    * @param {PipelineJson} [params.pipelineFlows] - Pipeline flow to be stored.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
    * @param {string} [params.assetCategory] - The category of the asset. Must be either SYSTEM or USER. Only a
    * registered service can use this parameter.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public datastageFlowsCreate(params: DatastageV3.DatastageFlowsCreateParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+  public createDatastageFlows(params: DatastageV3.CreateDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['dataIntgFlowName'];
 
@@ -250,7 +250,7 @@ class DatastageV3 extends BaseService {
       'asset_category': _params.assetCategory
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsCreate');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'createDatastageFlows');
 
     const parameters = {
       options: {
@@ -278,12 +278,12 @@ class DatastageV3 extends BaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.dataIntgFlowId - The DataStage flow ID to use.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>>}
    */
-  public datastageFlowsGet(params: DatastageV3.DatastageFlowsGetParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>> {
+  public getDatastageFlows(params: DatastageV3.GetDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['dataIntgFlowId'];
 
@@ -301,7 +301,7 @@ class DatastageV3 extends BaseService {
       'data_intg_flow_id': _params.dataIntgFlowId
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsGet');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'getDatastageFlows');
 
     const parameters = {
       options: {
@@ -323,19 +323,19 @@ class DatastageV3 extends BaseService {
   /**
    * Update DataStage flow.
    *
-   * Modifies a data flow in the specified project or catalog (either project_id or catalog_id must be set). All
+   * Modifies a data flow in the specified project or catalog (either `project_id` or `catalog_id` must be set). All
    * subsequent calls to use the data flow must specify the project or catalog ID the data flow was created in.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.dataIntgFlowId - The DataStage flow ID to use.
    * @param {string} params.dataIntgFlowName - The data flow name.
    * @param {PipelineJson} [params.pipelineFlows] - Pipeline flow to be stored.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public datastageFlowsUpdate(params: DatastageV3.DatastageFlowsUpdateParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+  public updateDatastageFlows(params: DatastageV3.UpdateDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['dataIntgFlowId', 'dataIntgFlowName'];
 
@@ -358,7 +358,7 @@ class DatastageV3 extends BaseService {
       'data_intg_flow_id': _params.dataIntgFlowId
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsUpdate');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'updateDatastageFlows');
 
     const parameters = {
       options: {
@@ -387,12 +387,12 @@ class DatastageV3 extends BaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.dataIntgFlowId - The DataStage flow ID to use.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public datastageFlowsClone(params: DatastageV3.DatastageFlowsCloneParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+  public cloneDatastageFlows(params: DatastageV3.CloneDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['dataIntgFlowId'];
 
@@ -410,7 +410,7 @@ class DatastageV3 extends BaseService {
       'data_intg_flow_id': _params.dataIntgFlowId
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsClone');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'cloneDatastageFlows');
 
     const parameters = {
       options: {
@@ -432,19 +432,19 @@ class DatastageV3 extends BaseService {
   /**
    * Compile DataStage flow to generate runtime assets.
    *
-   * Generate the runtime assets for a DataStage flow in the specified project or catalog (either project_id or
-   * catalog_id must be set) for specified runtime type.
+   * Generate the runtime assets for a DataStage flow in the specified project or catalog for a specified runtime type.
+   * Either project_id or catalog_id must be specified.
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.dataIntgFlowId - The DataStage flow ID to use.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
    * @param {string} [params.runtimeType] - The type of the runtime to use. e.g. dspxosh or Spark etc. If not provided
    * queried from within pipeline flow if available otherwise default of dspxosh is used.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.FlowCompileResponse>>}
    */
-  public datastageFlowsCompile(params: DatastageV3.DatastageFlowsCompileParams): Promise<DatastageV3.Response<DatastageV3.FlowCompileResponse>> {
+  public compileDatastageFlows(params: DatastageV3.CompileDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.FlowCompileResponse>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['dataIntgFlowId'];
 
@@ -463,11 +463,348 @@ class DatastageV3 extends BaseService {
       'data_intg_flow_id': _params.dataIntgFlowId
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'datastageFlowsCompile');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'compileDatastageFlows');
 
     const parameters = {
       options: {
         url: '/v3/ds_codegen/compile/{data_intg_flow_id}',
+        method: 'POST',
+        qs: query,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json;charset=utf-8',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /*************************
+   * dataStageSubflows
+   ************************/
+
+  /**
+   * Delete DataStage subflows.
+   *
+   * Deletes the specified data subflows in a project or catalog (either `project_id` or `catalog_id` must be set).
+   *
+   * If the deletion of the data subflows will take some time to finish, then a 202 response will be returned and the
+   * deletion will continue asynchronously.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string[]} params.id - The list of DataStage subflow IDs to delete.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DatastageV3.Response<DatastageV3.Empty>>}
+   */
+  public deleteDatastageSubflows(params: DatastageV3.DeleteDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.Empty>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['id'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const query = {
+      'id': _params.id,
+      'catalog_id': _params.catalogId,
+      'project_id': _params.projectId
+    };
+
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'deleteDatastageSubflows');
+
+    const parameters = {
+      options: {
+        url: '/v3/data_intg_flows/subflows',
+        method: 'DELETE',
+        qs: query,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Get metadata and lock information for DataStage subflows.
+   *
+   * Lists the metadata, entity and lock information for DataStage subflows that are contained in the specified project.
+   *
+   *
+   * Use the following parameters to filter the results:
+   *
+   * | Field                    | Match type   | Example                                 |
+   * | ------------------------ | ------------ | --------------------------------------- |
+   * | `entity.name`              | Equals           | `entity.name=MyDataStageSubFlow`  |
+   * | `entity.name`              | Starts with      | `entity.name=starts:MyData`  |
+   * | `entity.description`       | Equals           | `entity.description=movement`  |
+   * | `entity.description`       | Starts with      | `entity.description=starts:data`  |
+   *
+   * To sort the results, use one or more of the parameters  described in the following section. If no sort key is
+   * specified, the results are sorted in descending order on `metadata.create_time` (i.e. returning the most  recently
+   * created data flows first).
+   *
+   * | Field                          | Example |
+   * | ------------------------- | ----------------------------------- |
+   * | sort     | `sort=+entity.name` (sort by ascending name)  |
+   * | sort     | `sort=-metadata.create_time` (sort by descending creation time) |
+   *
+   * Multiple sort keys can be specified by delimiting them with a comma. For example, to sort in descending order on
+   * `create_time` and then in ascending order on name use: `sort=-metadata.create_time`,`+entity.name`.
+   *
+   * @param {Object} [params] - The parameters to send to the service.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.sort] - The field to sort the results on, including whether to sort ascending (+) or
+   * descending (-), for example, sort=-metadata.create_time.
+   * @param {string} [params.start] - The page token indicating where to start paging from.
+   * @param {number} [params.limit] - The limit of the number of items to return, for example limit=50. If not specified
+   * a default of 100 will be  used.
+   * @param {string} [params.entityName] - Filter results based on the specified name.
+   * @param {string} [params.entityDescription] - Filter results based on the specified description.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>>}
+   */
+  public listDatastageSubflows(params?: DatastageV3.ListDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>> {
+    const _params = Object.assign({}, params);
+
+    const query = {
+      'catalog_id': _params.catalogId,
+      'project_id': _params.projectId,
+      'sort': _params.sort,
+      'start': _params.start,
+      'limit': _params.limit,
+      'entity.name': _params.entityName,
+      'entity.description': _params.entityDescription
+    };
+
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'listDatastageSubflows');
+
+    const parameters = {
+      options: {
+        url: '/v3/data_intg_flows/subflows',
+        method: 'GET',
+        qs: query,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json;charset=utf-8',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Create DataStage subflow.
+   *
+   * Creates a DataStage subflow in the specified project or catalog (either `project_id` or `catalog_id` must be set).
+   * All subsequent calls to use the data flow must specify the project or catalog ID the data flow was created in.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.dataIntgSubflowName - The DataStage subflow name.
+   * @param {PipelineJson} [params.pipelineFlows] - Pipeline flow to be stored.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.assetCategory] - The category of the asset. Must be either SYSTEM or USER. Only a
+   * registered service can use this parameter.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
+   */
+  public createDatastageSubflows(params: DatastageV3.CreateDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['dataIntgSubflowName'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const body = {
+      'pipeline_flows': _params.pipelineFlows
+    };
+
+    const query = {
+      'data_intg_subflow_name': _params.dataIntgSubflowName,
+      'catalog_id': _params.catalogId,
+      'project_id': _params.projectId,
+      'asset_category': _params.assetCategory
+    };
+
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'createDatastageSubflows');
+
+    const parameters = {
+      options: {
+        url: '/v3/data_intg_flows/subflows',
+        method: 'POST',
+        body,
+        qs: query,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json;charset=utf-8',
+          'Content-Type': 'application/json;charset=utf-8',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Get DataStage subflow.
+   *
+   * Lists the DataStage subflow that is contained in the specified project. Attachments, metadata and a limited number
+   * of attributes from the entity of each DataStage flow is returned.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.dataIntgSubflowId - The DataStage subflow ID to use.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>>}
+   */
+  public getDatastageSubflows(params: DatastageV3.GetDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['dataIntgSubflowId'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const query = {
+      'catalog_id': _params.catalogId,
+      'project_id': _params.projectId
+    };
+
+    const path = {
+      'data_intg_subflow_id': _params.dataIntgSubflowId
+    };
+
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'getDatastageSubflows');
+
+    const parameters = {
+      options: {
+        url: '/v3/data_intg_flows/subflows/{data_intg_subflow_id}',
+        method: 'GET',
+        qs: query,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json;charset=utf-8',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Update DataStage subflow.
+   *
+   * Modifies a data subflow in the specified project or catalog (either `project_id` or `catalog_id` must be set). All
+   * subsequent calls to use the data flow must specify the project or catalog ID the data flow was created in.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.dataIntgSubflowId - The DataStage subflow ID to use.
+   * @param {string} params.dataIntgSubflowName - The DataStage subflow name.
+   * @param {PipelineJson} [params.pipelineFlows] - Pipeline flow to be stored.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
+   */
+  public updateDatastageSubflows(params: DatastageV3.UpdateDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['dataIntgSubflowId', 'dataIntgSubflowName'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const body = {
+      'pipeline_flows': _params.pipelineFlows
+    };
+
+    const query = {
+      'data_intg_subflow_name': _params.dataIntgSubflowName,
+      'catalog_id': _params.catalogId,
+      'project_id': _params.projectId
+    };
+
+    const path = {
+      'data_intg_subflow_id': _params.dataIntgSubflowId
+    };
+
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'updateDatastageSubflows');
+
+    const parameters = {
+      options: {
+        url: '/v3/data_intg_flows/subflows/{data_intg_subflow_id}',
+        method: 'PUT',
+        body,
+        qs: query,
+        path,
+      },
+      defaultOptions: extend(true, {}, this.baseOptions, {
+        headers: extend(true, sdkHeaders, {
+          'Accept': 'application/json;charset=utf-8',
+          'Content-Type': 'application/json;charset=utf-8',
+        }, _params.headers),
+      }),
+    };
+
+    return this.createRequest(parameters);
+  };
+
+  /**
+   * Clone DataStage subflow.
+   *
+   * Create a DataStage subflow in the specified project or catalog based on an existing DataStage subflow in the same
+   * project or catalog.
+   *
+   * @param {Object} params - The parameters to send to the service.
+   * @param {string} params.dataIntgSubflowId - The DataStage subflow ID to use.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
+   * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
+   * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
+   */
+  public cloneDatastageSubflows(params: DatastageV3.CloneDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+    const _params = Object.assign({}, params);
+    const requiredParams = ['dataIntgSubflowId'];
+
+    const missingParams = getMissingParams(_params, requiredParams);
+    if (missingParams) {
+      return Promise.reject(missingParams);
+    }
+
+    const query = {
+      'catalog_id': _params.catalogId,
+      'project_id': _params.projectId
+    };
+
+    const path = {
+      'data_intg_subflow_id': _params.dataIntgSubflowId
+    };
+
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'cloneDatastageSubflows');
+
+    const parameters = {
+      options: {
+        url: '/v3/data_intg_flows/subflows/{data_intg_subflow_id}/clone',
         method: 'POST',
         qs: query,
         path,
@@ -499,29 +836,29 @@ class DatastageV3 extends BaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {NodeJS.ReadableStream|Buffer} params.body -
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
    * @param {string} [params.onFailure] - Action when the first import failure occurs. The default action is "continue"
    * which will continue importing the remaining data flows. The "stop" action will stop the import operation upon the
    * first error.
    * @param {string} [params.conflictResolution] - Resolution when data flow to be imported has a name conflict with an
-   * existing data flow in the project or catalog. The default conflict resolution is "skip" will skip  the data flow so
+   * existing data flow in the project or catalog. The default conflict resolution is "skip" will skip the data flow so
    * that it will not be imported. The "rename" resolution will append "_Import_NNNN" suffix to the original name and
    * use the new name for the imported data flow, while the "replace" resolution will first remove the existing data
-   * flow with the same name and  import the new data flow. For the "rename_replace" option, when the flow name is
+   * flow with the same name and import the new data flow. For the "rename_replace" option, when the flow name is
    * already used, a new flow name with the suffix
    * "_DATASTAGE_ISX_IMPORT" will be used. If the name is not currently used, the imported flow will be created with
    * this name. In case the new name is already used, the existing flow will be removed  first before the imported flow
-   * is created. With the rename_replace option, job creation will be determined  as follows. If the job name is already
+   * is created. With the rename_replace option, job creation will be determined as follows. If the job name is already
    * used, a new job name with the suffix ".DataStage job" will be used. If the new job name is not currently used, the
    * job will be created with this name. In case the new job name is already used, the job creation will not happen and
    * an error will be raised.
    * @param {string} [params.attachmentType] - Type of attachment. The default attachment type is "isx".
-   * @param {string} [params.fileName] - Name of the input file (if exists).
+   * @param {string} [params.fileName] - Name of the input file, if it exists.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.ImportResponse>>}
    */
-  public migrationCreate(params: DatastageV3.MigrationCreateParams): Promise<DatastageV3.Response<DatastageV3.ImportResponse>> {
+  public createMigration(params: DatastageV3.CreateMigrationParams): Promise<DatastageV3.Response<DatastageV3.ImportResponse>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['body'];
 
@@ -540,7 +877,7 @@ class DatastageV3 extends BaseService {
       'file_name': _params.fileName
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'migrationCreate');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'createMigration');
 
     const parameters = {
       options: {
@@ -568,12 +905,12 @@ class DatastageV3 extends BaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.importId - Unique ID of the import request.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.Empty>>}
    */
-  public migrationDelete(params: DatastageV3.MigrationDeleteParams): Promise<DatastageV3.Response<DatastageV3.Empty>> {
+  public deleteMigration(params: DatastageV3.DeleteMigrationParams): Promise<DatastageV3.Response<DatastageV3.Empty>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['importId'];
 
@@ -591,7 +928,7 @@ class DatastageV3 extends BaseService {
       'import_id': _params.importId
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'migrationDelete');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'deleteMigration');
 
     const parameters = {
       options: {
@@ -618,12 +955,12 @@ class DatastageV3 extends BaseService {
    *
    * @param {Object} params - The parameters to send to the service.
    * @param {string} params.importId - Unique ID of the import request.
-   * @param {string} [params.catalogId] - The ID of the catalog to use. catalog_id or project_id is required.
-   * @param {string} [params.projectId] - The ID of the project to use. catalog_id or project_id is required.
+   * @param {string} [params.catalogId] - The ID of the catalog to use. `catalog_id` or `project_id` is required.
+   * @param {string} [params.projectId] - The ID of the project to use. `catalog_id` or `project_id` is required.
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.ImportResponse>>}
    */
-  public migrationGet(params: DatastageV3.MigrationGetParams): Promise<DatastageV3.Response<DatastageV3.ImportResponse>> {
+  public getMigration(params: DatastageV3.GetMigrationParams): Promise<DatastageV3.Response<DatastageV3.ImportResponse>> {
     const _params = Object.assign({}, params);
     const requiredParams = ['importId'];
 
@@ -641,7 +978,7 @@ class DatastageV3 extends BaseService {
       'import_id': _params.importId
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'migrationGet');
+    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'getMigration');
 
     const parameters = {
       options: {
@@ -691,13 +1028,13 @@ namespace DatastageV3 {
    * request interfaces
    ************************/
 
-  /** Parameters for the `datastageFlowsDelete` operation. */
-  export interface DatastageFlowsDeleteParams {
+  /** Parameters for the `deleteDatastageFlows` operation. */
+  export interface DeleteDatastageFlowsParams {
     /** The list of DataStage flow IDs to delete. */
     id: string[];
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
     projectId?: string;
     /** Whether to stop all running data flows. Running DataStage flows must be stopped before the DataStage flows
      *  can be deleted.
@@ -706,11 +1043,11 @@ namespace DatastageV3 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `datastageFlowsList` operation. */
-  export interface DatastageFlowsListParams {
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
+  /** Parameters for the `listDatastageFlows` operation. */
+  export interface ListDatastageFlowsParams {
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
     projectId?: string;
     /** The field to sort the results on, including whether to sort ascending (+) or descending (-), for example,
      *  sort=-metadata.create_time.
@@ -729,23 +1066,23 @@ namespace DatastageV3 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `datastageFlowsCreate` operation. */
-  export interface DatastageFlowsCreateParams {
+  /** Parameters for the `createDatastageFlows` operation. */
+  export interface CreateDatastageFlowsParams {
     /** The data flow name. */
     dataIntgFlowName: string;
     /** Pipeline flow to be stored. */
     pipelineFlows?: PipelineJson;
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
     projectId?: string;
     /** The category of the asset. Must be either SYSTEM or USER. Only a registered service can use this parameter. */
-    assetCategory?: DatastageFlowsCreateConstants.AssetCategory | string;
+    assetCategory?: CreateDatastageFlowsConstants.AssetCategory | string;
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Constants for the `datastageFlowsCreate` operation. */
-  export namespace DatastageFlowsCreateConstants {
+  /** Constants for the `createDatastageFlows` operation. */
+  export namespace CreateDatastageFlowsConstants {
     /** The category of the asset. Must be either SYSTEM or USER. Only a registered service can use this parameter. */
     export enum AssetCategory {
       SYSTEM = 'system',
@@ -753,50 +1090,50 @@ namespace DatastageV3 {
     }
   }
 
-  /** Parameters for the `datastageFlowsGet` operation. */
-  export interface DatastageFlowsGetParams {
+  /** Parameters for the `getDatastageFlows` operation. */
+  export interface GetDatastageFlowsParams {
     /** The DataStage flow ID to use. */
     dataIntgFlowId: string;
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
     projectId?: string;
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `datastageFlowsUpdate` operation. */
-  export interface DatastageFlowsUpdateParams {
+  /** Parameters for the `updateDatastageFlows` operation. */
+  export interface UpdateDatastageFlowsParams {
     /** The DataStage flow ID to use. */
     dataIntgFlowId: string;
     /** The data flow name. */
     dataIntgFlowName: string;
     /** Pipeline flow to be stored. */
     pipelineFlows?: PipelineJson;
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
     projectId?: string;
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `datastageFlowsClone` operation. */
-  export interface DatastageFlowsCloneParams {
+  /** Parameters for the `cloneDatastageFlows` operation. */
+  export interface CloneDatastageFlowsParams {
     /** The DataStage flow ID to use. */
     dataIntgFlowId: string;
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
     projectId?: string;
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `datastageFlowsCompile` operation. */
-  export interface DatastageFlowsCompileParams {
+  /** Parameters for the `compileDatastageFlows` operation. */
+  export interface CompileDatastageFlowsParams {
     /** The DataStage flow ID to use. */
     dataIntgFlowId: string;
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
     projectId?: string;
     /** The type of the runtime to use. e.g. dspxosh or Spark etc. If not provided queried from within pipeline flow
      *  if available otherwise default of dspxosh is used.
@@ -805,46 +1142,141 @@ namespace DatastageV3 {
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `migrationCreate` operation. */
-  export interface MigrationCreateParams {
-    body: NodeJS.ReadableStream|Buffer;
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
+  /** Parameters for the `deleteDatastageSubflows` operation. */
+  export interface DeleteDatastageSubflowsParams {
+    /** The list of DataStage subflow IDs to delete. */
+    id: string[];
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
+    projectId?: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `listDatastageSubflows` operation. */
+  export interface ListDatastageSubflowsParams {
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
+    catalogId?: string;
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
+    projectId?: string;
+    /** The field to sort the results on, including whether to sort ascending (+) or descending (-), for example,
+     *  sort=-metadata.create_time.
+     */
+    sort?: string;
+    /** The page token indicating where to start paging from. */
+    start?: string;
+    /** The limit of the number of items to return, for example limit=50. If not specified a default of 100 will be
+     *  used.
+     */
+    limit?: number;
+    /** Filter results based on the specified name. */
+    entityName?: string;
+    /** Filter results based on the specified description. */
+    entityDescription?: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `createDatastageSubflows` operation. */
+  export interface CreateDatastageSubflowsParams {
+    /** The DataStage subflow name. */
+    dataIntgSubflowName: string;
+    /** Pipeline flow to be stored. */
+    pipelineFlows?: PipelineJson;
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
+    catalogId?: string;
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
+    projectId?: string;
+    /** The category of the asset. Must be either SYSTEM or USER. Only a registered service can use this parameter. */
+    assetCategory?: CreateDatastageSubflowsConstants.AssetCategory | string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Constants for the `createDatastageSubflows` operation. */
+  export namespace CreateDatastageSubflowsConstants {
+    /** The category of the asset. Must be either SYSTEM or USER. Only a registered service can use this parameter. */
+    export enum AssetCategory {
+      SYSTEM = 'system',
+      USER = 'user',
+    }
+  }
+
+  /** Parameters for the `getDatastageSubflows` operation. */
+  export interface GetDatastageSubflowsParams {
+    /** The DataStage subflow ID to use. */
+    dataIntgSubflowId: string;
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
+    catalogId?: string;
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
+    projectId?: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `updateDatastageSubflows` operation. */
+  export interface UpdateDatastageSubflowsParams {
+    /** The DataStage subflow ID to use. */
+    dataIntgSubflowId: string;
+    /** The DataStage subflow name. */
+    dataIntgSubflowName: string;
+    /** Pipeline flow to be stored. */
+    pipelineFlows?: PipelineJson;
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
+    catalogId?: string;
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
+    projectId?: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `cloneDatastageSubflows` operation. */
+  export interface CloneDatastageSubflowsParams {
+    /** The DataStage subflow ID to use. */
+    dataIntgSubflowId: string;
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
+    catalogId?: string;
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
+    projectId?: string;
+    headers?: OutgoingHttpHeaders;
+  }
+
+  /** Parameters for the `createMigration` operation. */
+  export interface CreateMigrationParams {
+    body: NodeJS.ReadableStream|Buffer;
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
+    catalogId?: string;
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
     projectId?: string;
     /** Action when the first import failure occurs. The default action is "continue" which will continue importing
      *  the remaining data flows. The "stop" action will stop the import operation upon the first error.
      */
-    onFailure?: MigrationCreateConstants.OnFailure | string;
+    onFailure?: CreateMigrationConstants.OnFailure | string;
     /** Resolution when data flow to be imported has a name conflict with an existing data flow in the project or
-     *  catalog. The default conflict resolution is "skip" will skip  the data flow so that it will not be imported. The
+     *  catalog. The default conflict resolution is "skip" will skip the data flow so that it will not be imported. The
      *  "rename" resolution will append "_Import_NNNN" suffix to the original name and use the new name for the imported
-     *  data flow, while the "replace" resolution will first remove the existing data flow with the same name and
-     *  import the new data flow. For the "rename_replace" option, when the flow name is already used, a new flow name
-     *  with the suffix
+     *  data flow, while the "replace" resolution will first remove the existing data flow with the same name and import
+     *  the new data flow. For the "rename_replace" option, when the flow name is already used, a new flow name with the
+     *  suffix
      *  "_DATASTAGE_ISX_IMPORT" will be used. If the name is not currently used, the imported flow will be created with
      *  this name. In case the new name is already used, the existing flow will be removed  first before the imported
-     *  flow is created. With the rename_replace option, job creation will be determined  as follows. If the job name is
+     *  flow is created. With the rename_replace option, job creation will be determined as follows. If the job name is
      *  already used, a new job name with the suffix ".DataStage job" will be used. If the new job name is not currently
      *  used, the job will be created with this name. In case the new job name is already used, the job creation will
      *  not happen and an error will be raised.
      */
-    conflictResolution?: MigrationCreateConstants.ConflictResolution | string;
+    conflictResolution?: CreateMigrationConstants.ConflictResolution | string;
     /** Type of attachment. The default attachment type is "isx". */
-    attachmentType?: MigrationCreateConstants.AttachmentType | string;
-    /** Name of the input file (if exists). */
+    attachmentType?: CreateMigrationConstants.AttachmentType | string;
+    /** Name of the input file, if it exists. */
     fileName?: string;
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Constants for the `migrationCreate` operation. */
-  export namespace MigrationCreateConstants {
+  /** Constants for the `createMigration` operation. */
+  export namespace CreateMigrationConstants {
     /** Action when the first import failure occurs. The default action is "continue" which will continue importing the remaining data flows. The "stop" action will stop the import operation upon the first error. */
     export enum OnFailure {
       CONTINUE = 'continue',
       STOP = 'stop',
     }
-    /** Resolution when data flow to be imported has a name conflict with an existing data flow in the project or catalog. The default conflict resolution is "skip" will skip  the data flow so that it will not be imported. The "rename" resolution will append "_Import_NNNN" suffix to the original name and use the new name for the imported data flow, while the "replace" resolution will first remove the existing data flow with the same name and  import the new data flow. For the "rename_replace" option, when the flow name is already used, a new flow name with the suffix "_DATASTAGE_ISX_IMPORT" will be used. If the name is not currently used, the imported flow will be created with this name. In case the new name is already used, the existing flow will be removed  first before the imported flow is created. With the rename_replace option, job creation will be determined  as follows. If the job name is already used, a new job name with the suffix ".DataStage job" will be used. If the new job name is not currently used, the job will be created with this name. In case the new job name is already used, the job creation will not happen and an error will be raised. */
+    /** Resolution when data flow to be imported has a name conflict with an existing data flow in the project or catalog. The default conflict resolution is "skip" will skip the data flow so that it will not be imported. The "rename" resolution will append "_Import_NNNN" suffix to the original name and use the new name for the imported data flow, while the "replace" resolution will first remove the existing data flow with the same name and import the new data flow. For the "rename_replace" option, when the flow name is already used, a new flow name with the suffix "_DATASTAGE_ISX_IMPORT" will be used. If the name is not currently used, the imported flow will be created with this name. In case the new name is already used, the existing flow will be removed  first before the imported flow is created. With the rename_replace option, job creation will be determined as follows. If the job name is already used, a new job name with the suffix ".DataStage job" will be used. If the new job name is not currently used, the job will be created with this name. In case the new job name is already used, the job creation will not happen and an error will be raised. */
     export enum ConflictResolution {
       SKIP = 'skip',
       RENAME = 'rename',
@@ -857,24 +1289,24 @@ namespace DatastageV3 {
     }
   }
 
-  /** Parameters for the `migrationDelete` operation. */
-  export interface MigrationDeleteParams {
+  /** Parameters for the `deleteMigration` operation. */
+  export interface DeleteMigrationParams {
     /** Unique ID of the import request. */
     importId: string;
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
     projectId?: string;
     headers?: OutgoingHttpHeaders;
   }
 
-  /** Parameters for the `migrationGet` operation. */
-  export interface MigrationGetParams {
+  /** Parameters for the `getMigration` operation. */
+  export interface GetMigrationParams {
     /** Unique ID of the import request. */
     importId: string;
-    /** The ID of the catalog to use. catalog_id or project_id is required. */
+    /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
-    /** The ID of the project to use. catalog_id or project_id is required. */
+    /** The ID of the project to use. `catalog_id` or `project_id` is required. */
     projectId?: string;
     headers?: OutgoingHttpHeaders;
   }
@@ -899,7 +1331,7 @@ namespace DatastageV3 {
     asset_id?: string;
     /** The type of the asset. */
     asset_type?: string;
-    /** The ID of the catalog which contains the asset. catalog_id or project_id is required. */
+    /** The ID of the catalog which contains the asset. `catalog_id` or `project_id` is required. */
     catalog_id?: string;
     /** The timestamp when the asset was created (in format YYYY-MM-DDTHH:mm:ssZ or YYYY-MM-DDTHH:mm:ss.sssZ,
      *  matching the date-time format as specified by RFC 3339).
@@ -915,7 +1347,7 @@ namespace DatastageV3 {
     name?: string;
     /** origin of the asset. */
     origin_country?: string;
-    /** The ID of the project which contains the asset. catalog_id or project_id is required. */
+    /** The ID of the project which contains the asset. `catalog_id` or `project_id` is required. */
     project_id?: string;
     /** This is a unique string that uniquely identifies an asset. */
     resource_key?: string;
@@ -971,6 +1403,8 @@ namespace DatastageV3 {
     description?: string;
     /** error object name. */
     name: string;
+    /** error stage type. */
+    stage_type?: string;
     /** error type. */
     type: string;
   }
@@ -989,6 +1423,8 @@ namespace DatastageV3 {
   export interface DataIntgFlowEntity {
     /** Asset type object. */
     data_intg_flow?: JsonObject;
+    /** Asset type object. */
+    data_intg_subflow?: JsonObject;
     /** The description of the DataStage flow. */
     description?: string;
     /** Lock information for a DataStage flow asset. */
@@ -1039,7 +1475,7 @@ namespace DatastageV3 {
   export interface FlowCompileResponse {
     /** Compile result for DataStage flow. */
     message?: JsonObject;
-    /** Compile response type. e.g. ok or error. */
+    /** Compile response type. For example ok or error. */
     type?: string;
   }
 
@@ -1063,8 +1499,6 @@ namespace DatastageV3 {
     parameter_sets_total?: number;
     /** Total number of data flows that have not been processed. */
     pending: number;
-    /** Total number of parallel job containers. */
-    px_containers_total?: number;
     /** Total number of data flows successfully imported and renamed due to a name conflict. The renamed count is
      *  included in the imported count.
      */
@@ -1079,6 +1513,8 @@ namespace DatastageV3 {
      *  count or imported count.
      */
     skipped: number;
+    /** Total number of parallel job subflows. */
+    subflows_total?: number;
     /** Total number of table definitions. */
     table_definitions_total?: number;
     /** Total number of data flows to be imported. */
@@ -1135,17 +1571,29 @@ namespace DatastageV3 {
     type: string;
   }
 
+  /** Import event notification. */
+  export interface ImportNotification {
+    /** The timestamp when the import notification was created. In format YYYY-MM-DDTHH:mm:ssZ or
+     *  YYYY-MM-DDTHH:mm:ss.sssZ, matching the date-time format as specified by RFC 3339.
+     */
+    created_at: string;
+    /** Notification id. */
+    id: string;
+    /** Import status associated with the notification. */
+    status: string;
+  }
+
   /** Response object of an import request. */
   export interface ImportResponse {
-    /** import response entity. */
+    /** Import the response entity. */
     entity: ImportResponseEntity;
-    /** import response metadata. */
+    /** Import the response metadata. */
     metadata: ImportResponseMetadata;
   }
 
-  /** import response entity. */
+  /** Import the response entity. */
   export interface ImportResponseEntity {
-    /** Account ID of the user who cancelled the import request. This field is required only when the status  field
+    /** Account ID of the user who cancelled the import request. This field is required only when the status field
      *  is "cancelled".
      */
     cancelled_by?: string;
@@ -1161,6 +1609,8 @@ namespace DatastageV3 {
     import_data_flows: ImportFlow[];
     /** Name of the import request. */
     name?: string;
+    /** Import event notifications. */
+    notifications?: ImportNotification[];
     /** The on_failure option used for the import. */
     on_failure?: string;
     /** Estimate of remaining time in seconds. */
@@ -1177,7 +1627,7 @@ namespace DatastageV3 {
     tally?: ImportCount;
   }
 
-  /** import response metadata. */
+  /** Import the response metadata. */
   export interface ImportResponseMetadata {
     /** Catalog id. */
     catalog_id?: string;
@@ -1236,6 +1686,8 @@ namespace DatastageV3 {
     description?: string;
     /** Unique identifier. */
     id?: string;
+    /** Name of the pipeline. */
+    name?: string;
     /** Array of pipeline nodes. */
     nodes?: JsonObject[];
     /** Reference to the runtime type. */
