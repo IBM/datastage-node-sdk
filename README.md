@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.com/ibmcloud/datastage-node-sdk.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/ibmcloud/datastage-node-sdk)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 <!--
 [![npm-version](https://img.shields.io/npm/v/ibmcloud/datastage-node-sdk.svg)](https://www.npmjs.com/package/datastage)
@@ -70,7 +69,7 @@ please ask a question at
 
 ## Issues
 If you encounter an issue with the SDK, you are welcome to submit
-a [bug report](https://github.ibm.com/ibmcloud/datastage-node-sdk/issues).
+a [bug report](https://github.com/IBM/datastage-node-sdk/issues).
 Before that, please search for similar issues. It's possible someone has
 already encountered this issue.
 
