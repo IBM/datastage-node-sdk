@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/ibmcloud/datastage-node-sdk/branch/main/graph/badge.svg)](https://codecov.io/gh/ibmcloud/datastage-node-sdk)
 -->
 # IBM DataStage SDK for Node
-Node.js client library to interact with various [DataStage APIs](https://cloud.ibm.com/apidocs?category=datastage).
+Node.js client library to interact with various [DataStage APIs](https://cloud.ibm.com/apidocs/datastage).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
@@ -46,7 +46,7 @@ Service Name | Import Path
 
 ## Prerequisites
 * You need an [IBM Cloud][ibm-cloud-onboarding] account.
-* **Node.js >=10**: This SDK is tested with Node.js versions 10 and up. It may work on previous versions but this is not officially supported.
+* **Node.js >=12**: This SDK is tested with Node.js versions 12 and up. It may work on previous versions but this is not officially supported.
 
 [ibm-cloud-onboarding]: http://cloud.ibm.com/registration
 
