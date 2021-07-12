@@ -1,3 +1,5 @@
+/* eslint 'array-callback-return': 'off' */
+
 const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
@@ -12,22 +14,22 @@ const ansi_regex = new RegExp(
   'g'
 );
 
-const failed_suits = test_ouput_json.testResults.filter(suite => suite.status === 'failed');
+const failed_suits = test_ouput_json.testResults.filter((suite) => suite.status === 'failed');
 
 const errors = {
   service: [],
   test: [],
 };
 
-failed_suits.map(suite => {
-  const failed_tests = suite.assertionResults.filter(test => test.status === 'failed');
+failed_suits.map((suite) => {
+  const failed_tests = suite.assertionResults.filter((test) => test.status === 'failed');
   const error_suite = {
     name: suite.name.split('node-sdk/test')[1],
     service: [],
     test: [],
   };
 
-  failed_tests.map(result => {
+  failed_tests.map((result) => {
     const message_clean = result.failureMessages.join('\n').replace(ansi_regex, '');
     error_suite[message_clean.indexOf(/^Received: 5/m) > 0 ? 'service' : 'test'].push(
       `${result.fullName}\n${message_clean}`
@@ -53,7 +55,7 @@ if (process.env.TRAVIS_PULL_REQUEST && process.env.TRAVIS_PULL_REQUEST !== 'fals
     .post(
       `https://api.github.com/repos/${process.env.TRAVIS_REPO_SLUG}/issues/${process.env.TRAVIS_PULL_REQUEST}/comments`,
       {
-        body: body,
+        body,
       },
       {
         headers: {
@@ -62,7 +64,7 @@ if (process.env.TRAVIS_PULL_REQUEST && process.env.TRAVIS_PULL_REQUEST !== 'fals
         },
       }
     )
-    .catch(error => {
+    .catch((error) => {
       console.error(error); // eslint-disable-line
     })
     .then(() => {

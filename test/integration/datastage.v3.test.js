@@ -15,11 +15,10 @@
  * limitations under the License.
  */
 
-'use strict';
-const DatastageV3 = require('../../dist/datastage/v3');
 const { readExternalSources } = require('ibm-cloud-sdk-core');
-const authHelper = require('../resources/auth-helper.js');
 const fs = require('fs');
+const DatastageV3 = require('../../dist/datastage/v3');
+const authHelper = require('../resources/auth-helper.js');
 
 // testcase timeout value (200s).
 const timeout = 200000;
@@ -71,7 +70,7 @@ describe('DatastageV3_integration', () => {
     const pipelineJsonFromFile = JSON.parse(fs.readFileSync('testInput/rowgen_peek.json', 'utf-8'));
 
     const params = {
-      dataIntgFlowName: dataIntgFlowName,
+      dataIntgFlowName,
       pipelineFlows: pipelineJsonFromFile,
       projectId: projectID,
       assetCategory: 'system',
@@ -99,7 +98,7 @@ describe('DatastageV3_integration', () => {
     );
     const params = {
       dataIntgFlowId: assetID,
-      dataIntgFlowName: dataIntgFlowName,
+      dataIntgFlowName,
       pipelineFlows: pipelineJsonFromFile,
       projectId: projectID,
       assetCategory: 'system',
@@ -135,7 +134,7 @@ describe('DatastageV3_integration', () => {
     const params = {
       projectId: projectID,
       sort: 'name',
-      limit: 100
+      limit: 100,
     };
 
     const res = await datastageService.listDatastageSubflows(params);
@@ -144,7 +143,9 @@ describe('DatastageV3_integration', () => {
   });
   test('createDatastageSubflows()', async () => {
     // Request models needed by this operation.
-    const pipelineJsonFromFile = JSON.parse(fs.readFileSync('testInput/subflow_sort.json', 'utf-8'));
+    const pipelineJsonFromFile = JSON.parse(
+      fs.readFileSync('testInput/subflow_sort.json', 'utf-8')
+    );
 
     const params = {
       dataIntgSubflowName: dataIntgSubFlowName,
