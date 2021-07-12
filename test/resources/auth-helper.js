@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-'use strict';
-
 const fs = require('fs');
 const dotenv = require('dotenv');
 
@@ -30,7 +28,7 @@ let configFileExists;
 
 // `filename` is the location of the credentials file
 // returns the appropriate "describe" to be used for the tests.
-module.exports.prepareTests = filename => {
+module.exports.prepareTests = (filename) => {
   // Save off the name of the config file.
   configFilename = filename;
 
@@ -50,9 +48,7 @@ module.exports.prepareTests = filename => {
   return describeToUse;
 };
 
-module.exports.getDescribe = () => {
-  return describeToUse;
-};
+module.exports.getDescribe = () => describeToUse;
 
 // This function will load the contents of "configFilename" and
 // set the properties as environment variables.

@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
 
 // need to import the whole package to mock getAuthenticatorFromEnvironment
 const core = require('ibm-cloud-sdk-core');
+
 const { NoAuthAuthenticator, unitTestUtils } = core;
 
 const DatastageV3 = require('../../dist/datastage/v3');
@@ -108,10 +108,10 @@ describe('DatastageV3', () => {
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const force = true;
         const params = {
-          id: id,
-          catalogId: catalogId,
-          projectId: projectId,
-          force: force,
+          id,
+          catalogId,
+          projectId,
+          force,
         };
 
         const deleteDatastageFlowsResult = datastageService.deleteDatastageFlows(params);
@@ -128,10 +128,10 @@ describe('DatastageV3', () => {
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['id']).toEqual(id);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.qs['force']).toEqual(force);
+        expect(options.qs.id).toEqual(id);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.qs.force).toEqual(force);
       });
 
       test('should prioritize user-given headers', () => {
@@ -188,13 +188,13 @@ describe('DatastageV3', () => {
         const entityName = 'testString';
         const entityDescription = 'testString';
         const params = {
-          catalogId: catalogId,
-          projectId: projectId,
-          sort: sort,
-          start: start,
-          limit: limit,
-          entityName: entityName,
-          entityDescription: entityDescription,
+          catalogId,
+          projectId,
+          sort,
+          start,
+          limit,
+          entityName,
+          entityDescription,
         };
 
         const listDatastageFlowsResult = datastageService.listDatastageFlows(params);
@@ -211,11 +211,11 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.qs['sort']).toEqual(sort);
-        expect(options.qs['start']).toEqual(start);
-        expect(options.qs['limit']).toEqual(limit);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.qs.sort).toEqual(sort);
+        expect(options.qs.start).toEqual(start);
+        expect(options.qs.limit).toEqual(limit);
         expect(options.qs['entity.name']).toEqual(entityName);
         expect(options.qs['entity.description']).toEqual(entityDescription);
       });
@@ -280,11 +280,11 @@ describe('DatastageV3', () => {
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const assetCategory = 'system';
         const params = {
-          dataIntgFlowName: dataIntgFlowName,
-          pipelineFlows: pipelineFlows,
-          catalogId: catalogId,
-          projectId: projectId,
-          assetCategory: assetCategory,
+          dataIntgFlowName,
+          pipelineFlows,
+          catalogId,
+          projectId,
+          assetCategory,
         };
 
         const createDatastageFlowsResult = datastageService.createDatastageFlows(params);
@@ -301,11 +301,11 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = 'application/json;charset=utf-8';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['pipeline_flows']).toEqual(pipelineFlows);
-        expect(options.qs['data_intg_flow_name']).toEqual(dataIntgFlowName);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.qs['asset_category']).toEqual(assetCategory);
+        expect(options.body.pipeline_flows).toEqual(pipelineFlows);
+        expect(options.qs.data_intg_flow_name).toEqual(dataIntgFlowName);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.qs.asset_category).toEqual(assetCategory);
       });
 
       test('should prioritize user-given headers', () => {
@@ -358,9 +358,9 @@ describe('DatastageV3', () => {
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const params = {
-          dataIntgFlowId: dataIntgFlowId,
-          catalogId: catalogId,
-          projectId: projectId,
+          dataIntgFlowId,
+          catalogId,
+          projectId,
         };
 
         const getDatastageFlowsResult = datastageService.getDatastageFlows(params);
@@ -377,9 +377,9 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.path['data_intg_flow_id']).toEqual(dataIntgFlowId);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.path.data_intg_flow_id).toEqual(dataIntgFlowId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -462,11 +462,11 @@ describe('DatastageV3', () => {
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const params = {
-          dataIntgFlowId: dataIntgFlowId,
-          dataIntgFlowName: dataIntgFlowName,
-          pipelineFlows: pipelineFlows,
-          catalogId: catalogId,
-          projectId: projectId,
+          dataIntgFlowId,
+          dataIntgFlowName,
+          pipelineFlows,
+          catalogId,
+          projectId,
         };
 
         const updateDatastageFlowsResult = datastageService.updateDatastageFlows(params);
@@ -483,11 +483,11 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = 'application/json;charset=utf-8';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['pipeline_flows']).toEqual(pipelineFlows);
-        expect(options.qs['data_intg_flow_name']).toEqual(dataIntgFlowName);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.path['data_intg_flow_id']).toEqual(dataIntgFlowId);
+        expect(options.body.pipeline_flows).toEqual(pipelineFlows);
+        expect(options.qs.data_intg_flow_name).toEqual(dataIntgFlowName);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.path.data_intg_flow_id).toEqual(dataIntgFlowId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -542,9 +542,9 @@ describe('DatastageV3', () => {
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const params = {
-          dataIntgFlowId: dataIntgFlowId,
-          catalogId: catalogId,
-          projectId: projectId,
+          dataIntgFlowId,
+          catalogId,
+          projectId,
         };
 
         const cloneDatastageFlowsResult = datastageService.cloneDatastageFlows(params);
@@ -561,9 +561,9 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.path['data_intg_flow_id']).toEqual(dataIntgFlowId);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.path.data_intg_flow_id).toEqual(dataIntgFlowId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -617,10 +617,10 @@ describe('DatastageV3', () => {
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const runtimeType = 'testString';
         const params = {
-          dataIntgFlowId: dataIntgFlowId,
-          catalogId: catalogId,
-          projectId: projectId,
-          runtimeType: runtimeType,
+          dataIntgFlowId,
+          catalogId,
+          projectId,
+          runtimeType,
         };
 
         const compileDatastageFlowsResult = datastageService.compileDatastageFlows(params);
@@ -637,10 +637,10 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.qs['runtime_type']).toEqual(runtimeType);
-        expect(options.path['data_intg_flow_id']).toEqual(dataIntgFlowId);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.qs.runtime_type).toEqual(runtimeType);
+        expect(options.path.data_intg_flow_id).toEqual(dataIntgFlowId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -693,9 +693,9 @@ describe('DatastageV3', () => {
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const params = {
-          id: id,
-          catalogId: catalogId,
-          projectId: projectId,
+          id,
+          catalogId,
+          projectId,
         };
 
         const deleteDatastageSubflowsResult = datastageService.deleteDatastageSubflows(params);
@@ -712,9 +712,9 @@ describe('DatastageV3', () => {
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['id']).toEqual(id);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
+        expect(options.qs.id).toEqual(id);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -771,13 +771,13 @@ describe('DatastageV3', () => {
         const entityName = 'testString';
         const entityDescription = 'testString';
         const params = {
-          catalogId: catalogId,
-          projectId: projectId,
-          sort: sort,
-          start: start,
-          limit: limit,
-          entityName: entityName,
-          entityDescription: entityDescription,
+          catalogId,
+          projectId,
+          sort,
+          start,
+          limit,
+          entityName,
+          entityDescription,
         };
 
         const listDatastageSubflowsResult = datastageService.listDatastageSubflows(params);
@@ -794,11 +794,11 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.qs['sort']).toEqual(sort);
-        expect(options.qs['start']).toEqual(start);
-        expect(options.qs['limit']).toEqual(limit);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.qs.sort).toEqual(sort);
+        expect(options.qs.start).toEqual(start);
+        expect(options.qs.limit).toEqual(limit);
         expect(options.qs['entity.name']).toEqual(entityName);
         expect(options.qs['entity.description']).toEqual(entityDescription);
       });
@@ -863,11 +863,11 @@ describe('DatastageV3', () => {
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const assetCategory = 'system';
         const params = {
-          dataIntgSubflowName: dataIntgSubflowName,
-          pipelineFlows: pipelineFlows,
-          catalogId: catalogId,
-          projectId: projectId,
-          assetCategory: assetCategory,
+          dataIntgSubflowName,
+          pipelineFlows,
+          catalogId,
+          projectId,
+          assetCategory,
         };
 
         const createDatastageSubflowsResult = datastageService.createDatastageSubflows(params);
@@ -884,11 +884,11 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = 'application/json;charset=utf-8';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['pipeline_flows']).toEqual(pipelineFlows);
-        expect(options.qs['data_intg_subflow_name']).toEqual(dataIntgSubflowName);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.qs['asset_category']).toEqual(assetCategory);
+        expect(options.body.pipeline_flows).toEqual(pipelineFlows);
+        expect(options.qs.data_intg_subflow_name).toEqual(dataIntgSubflowName);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.qs.asset_category).toEqual(assetCategory);
       });
 
       test('should prioritize user-given headers', () => {
@@ -941,9 +941,9 @@ describe('DatastageV3', () => {
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const params = {
-          dataIntgSubflowId: dataIntgSubflowId,
-          catalogId: catalogId,
-          projectId: projectId,
+          dataIntgSubflowId,
+          catalogId,
+          projectId,
         };
 
         const getDatastageSubflowsResult = datastageService.getDatastageSubflows(params);
@@ -960,9 +960,9 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.path['data_intg_subflow_id']).toEqual(dataIntgSubflowId);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.path.data_intg_subflow_id).toEqual(dataIntgSubflowId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -1045,11 +1045,11 @@ describe('DatastageV3', () => {
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const params = {
-          dataIntgSubflowId: dataIntgSubflowId,
-          dataIntgSubflowName: dataIntgSubflowName,
-          pipelineFlows: pipelineFlows,
-          catalogId: catalogId,
-          projectId: projectId,
+          dataIntgSubflowId,
+          dataIntgSubflowName,
+          pipelineFlows,
+          catalogId,
+          projectId,
         };
 
         const updateDatastageSubflowsResult = datastageService.updateDatastageSubflows(params);
@@ -1066,11 +1066,11 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = 'application/json;charset=utf-8';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.body['pipeline_flows']).toEqual(pipelineFlows);
-        expect(options.qs['data_intg_subflow_name']).toEqual(dataIntgSubflowName);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.path['data_intg_subflow_id']).toEqual(dataIntgSubflowId);
+        expect(options.body.pipeline_flows).toEqual(pipelineFlows);
+        expect(options.qs.data_intg_subflow_name).toEqual(dataIntgSubflowName);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.path.data_intg_subflow_id).toEqual(dataIntgSubflowId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -1125,9 +1125,9 @@ describe('DatastageV3', () => {
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const params = {
-          dataIntgSubflowId: dataIntgSubflowId,
-          catalogId: catalogId,
-          projectId: projectId,
+          dataIntgSubflowId,
+          catalogId,
+          projectId,
         };
 
         const cloneDatastageSubflowsResult = datastageService.cloneDatastageSubflows(params);
@@ -1148,9 +1148,9 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.path['data_intg_subflow_id']).toEqual(dataIntgSubflowId);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.path.data_intg_subflow_id).toEqual(dataIntgSubflowId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -1207,13 +1207,13 @@ describe('DatastageV3', () => {
         const attachmentType = 'isx';
         const fileName = 'myFlows.isx';
         const params = {
-          body: body,
-          catalogId: catalogId,
-          projectId: projectId,
-          onFailure: onFailure,
-          conflictResolution: conflictResolution,
-          attachmentType: attachmentType,
-          fileName: fileName,
+          body,
+          catalogId,
+          projectId,
+          onFailure,
+          conflictResolution,
+          attachmentType,
+          fileName,
         };
 
         const createMigrationResult = datastageService.createMigration(params);
@@ -1231,12 +1231,12 @@ describe('DatastageV3', () => {
         const expectedContentType = 'application/octet-stream';
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
         expect(options.body).toEqual(body);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.qs['on_failure']).toEqual(onFailure);
-        expect(options.qs['conflict_resolution']).toEqual(conflictResolution);
-        expect(options.qs['attachment_type']).toEqual(attachmentType);
-        expect(options.qs['file_name']).toEqual(fileName);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.qs.on_failure).toEqual(onFailure);
+        expect(options.qs.conflict_resolution).toEqual(conflictResolution);
+        expect(options.qs.attachment_type).toEqual(attachmentType);
+        expect(options.qs.file_name).toEqual(fileName);
       });
 
       test('should prioritize user-given headers', () => {
@@ -1289,9 +1289,9 @@ describe('DatastageV3', () => {
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const params = {
-          importId: importId,
-          catalogId: catalogId,
-          projectId: projectId,
+          importId,
+          catalogId,
+          projectId,
         };
 
         const deleteMigrationResult = datastageService.deleteMigration(params);
@@ -1308,9 +1308,9 @@ describe('DatastageV3', () => {
         const expectedAccept = undefined;
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.path['import_id']).toEqual(importId);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.path.import_id).toEqual(importId);
       });
 
       test('should prioritize user-given headers', () => {
@@ -1363,9 +1363,9 @@ describe('DatastageV3', () => {
         const catalogId = 'testString';
         const projectId = 'bd0dbbfd-810d-4f0e-b0a9-228c328a8e23';
         const params = {
-          importId: importId,
-          catalogId: catalogId,
-          projectId: projectId,
+          importId,
+          catalogId,
+          projectId,
         };
 
         const getMigrationResult = datastageService.getMigration(params);
@@ -1382,9 +1382,9 @@ describe('DatastageV3', () => {
         const expectedAccept = 'application/json;charset=utf-8';
         const expectedContentType = undefined;
         checkMediaHeaders(createRequestMock, expectedAccept, expectedContentType);
-        expect(options.qs['catalog_id']).toEqual(catalogId);
-        expect(options.qs['project_id']).toEqual(projectId);
-        expect(options.path['import_id']).toEqual(importId);
+        expect(options.qs.catalog_id).toEqual(catalogId);
+        expect(options.qs.project_id).toEqual(projectId);
+        expect(options.path.import_id).toEqual(importId);
       });
 
       test('should prioritize user-given headers', () => {

@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
 
 const common = require('../../dist/lib/common');
+
 const { getSdkHeaders } = common;
 
 describe('Tests of Common Library', () => {
   describe('getSdkHeaders', () => {
     test('should return correct User-Agent header', () => {
       const headers = getSdkHeaders('service1', 'v1', 'operation1');
-      expect(headers).not.toEqual(null);
-      expect(headers['agentname']).toMatch('datastage-node-sdk');
+      expect(headers).not.toBeNull();
+      expect(headers.agentname).toMatch('datastage-node-sdk');
     });
   });
 });
