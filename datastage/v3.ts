@@ -18,10 +18,15 @@
  * IBM OpenAPI SDK Code Generator Version: 3.28.0-55613c9e-20210220-164656
  */
 
-
 import * as extend from 'extend';
 import { IncomingHttpHeaders, OutgoingHttpHeaders } from 'http';
-import { Authenticator, BaseService, getAuthenticatorFromEnvironment, getMissingParams, UserOptions } from 'ibm-cloud-sdk-core';
+import {
+  Authenticator,
+  BaseService,
+  getAuthenticatorFromEnvironment,
+  getMissingParams,
+  UserOptions,
+} from 'ibm-cloud-sdk-core';
 import { getSdkHeaders } from '../lib/common';
 
 /**
@@ -29,8 +34,8 @@ import { getSdkHeaders } from '../lib/common';
  */
 
 class DatastageV3 extends BaseService {
-
   static DEFAULT_SERVICE_URL: string = 'https://datastage.cloud.ibm.com/data_intg';
+
   static DEFAULT_SERVICE_NAME: string = 'datastage';
 
   /*************************
@@ -63,7 +68,6 @@ class DatastageV3 extends BaseService {
     }
     return service;
   }
-
 
   /**
    * Construct a DatastageV3 object.
@@ -111,8 +115,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.Empty>>}
    */
-  public deleteDatastageFlows(params: DatastageV3.DeleteDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.Empty>> {
-    const _params = Object.assign({}, params);
+  public deleteDatastageFlows(
+    params: DatastageV3.DeleteDatastageFlowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['id'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -124,10 +130,14 @@ class DatastageV3 extends BaseService {
       'id': _params.id,
       'catalog_id': _params.catalogId,
       'project_id': _params.projectId,
-      'force': _params.force
+      'force': _params.force,
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'deleteDatastageFlows');
+    const sdkHeaders = getSdkHeaders(
+      DatastageV3.DEFAULT_SERVICE_NAME,
+      'v3',
+      'deleteDatastageFlows'
+    );
 
     const parameters = {
       options: {
@@ -136,13 +146,12 @@ class DatastageV3 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
+        headers: extend(true, sdkHeaders, {}, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Get metadata and lock information for DataStage flows.
@@ -183,8 +192,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>>}
    */
-  public listDatastageFlows(params?: DatastageV3.ListDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>> {
-    const _params = Object.assign({}, params);
+  public listDatastageFlows(
+    params?: DatastageV3.ListDatastageFlowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>> {
+    const _params = { ...params };
 
     const query = {
       'catalog_id': _params.catalogId,
@@ -193,7 +204,7 @@ class DatastageV3 extends BaseService {
       'start': _params.start,
       'limit': _params.limit,
       'entity.name': _params.entityName,
-      'entity.description': _params.entityDescription
+      'entity.description': _params.entityDescription,
     };
 
     const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'listDatastageFlows');
@@ -205,14 +216,19 @@ class DatastageV3 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Create DataStage flow.
@@ -230,8 +246,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public createDatastageFlows(params: DatastageV3.CreateDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
-    const _params = Object.assign({}, params);
+  public createDatastageFlows(
+    params: DatastageV3.CreateDatastageFlowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+    const _params = { ...params };
     const requiredParams = ['dataIntgFlowName'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -240,17 +258,21 @@ class DatastageV3 extends BaseService {
     }
 
     const body = {
-      'pipeline_flows': _params.pipelineFlows
+      'pipeline_flows': _params.pipelineFlows,
     };
 
     const query = {
       'data_intg_flow_name': _params.dataIntgFlowName,
       'catalog_id': _params.catalogId,
       'project_id': _params.projectId,
-      'asset_category': _params.assetCategory
+      'asset_category': _params.assetCategory,
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'createDatastageFlows');
+    const sdkHeaders = getSdkHeaders(
+      DatastageV3.DEFAULT_SERVICE_NAME,
+      'v3',
+      'createDatastageFlows'
+    );
 
     const parameters = {
       options: {
@@ -260,15 +282,20 @@ class DatastageV3 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-          'Content-Type': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+            'Content-Type': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Get DataStage flow.
@@ -283,8 +310,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>>}
    */
-  public getDatastageFlows(params: DatastageV3.GetDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>> {
-    const _params = Object.assign({}, params);
+  public getDatastageFlows(
+    params: DatastageV3.GetDatastageFlowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>> {
+    const _params = { ...params };
     const requiredParams = ['dataIntgFlowId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -294,11 +323,11 @@ class DatastageV3 extends BaseService {
 
     const query = {
       'catalog_id': _params.catalogId,
-      'project_id': _params.projectId
+      'project_id': _params.projectId,
     };
 
     const path = {
-      'data_intg_flow_id': _params.dataIntgFlowId
+      'data_intg_flow_id': _params.dataIntgFlowId,
     };
 
     const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'getDatastageFlows');
@@ -311,14 +340,19 @@ class DatastageV3 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Update DataStage flow.
@@ -335,8 +369,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public updateDatastageFlows(params: DatastageV3.UpdateDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
-    const _params = Object.assign({}, params);
+  public updateDatastageFlows(
+    params: DatastageV3.UpdateDatastageFlowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+    const _params = { ...params };
     const requiredParams = ['dataIntgFlowId', 'dataIntgFlowName'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -345,20 +381,24 @@ class DatastageV3 extends BaseService {
     }
 
     const body = {
-      'pipeline_flows': _params.pipelineFlows
+      'pipeline_flows': _params.pipelineFlows,
     };
 
     const query = {
       'data_intg_flow_name': _params.dataIntgFlowName,
       'catalog_id': _params.catalogId,
-      'project_id': _params.projectId
+      'project_id': _params.projectId,
     };
 
     const path = {
-      'data_intg_flow_id': _params.dataIntgFlowId
+      'data_intg_flow_id': _params.dataIntgFlowId,
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'updateDatastageFlows');
+    const sdkHeaders = getSdkHeaders(
+      DatastageV3.DEFAULT_SERVICE_NAME,
+      'v3',
+      'updateDatastageFlows'
+    );
 
     const parameters = {
       options: {
@@ -369,15 +409,20 @@ class DatastageV3 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-          'Content-Type': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+            'Content-Type': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Clone DataStage flow.
@@ -392,8 +437,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public cloneDatastageFlows(params: DatastageV3.CloneDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
-    const _params = Object.assign({}, params);
+  public cloneDatastageFlows(
+    params: DatastageV3.CloneDatastageFlowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+    const _params = { ...params };
     const requiredParams = ['dataIntgFlowId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -403,11 +450,11 @@ class DatastageV3 extends BaseService {
 
     const query = {
       'catalog_id': _params.catalogId,
-      'project_id': _params.projectId
+      'project_id': _params.projectId,
     };
 
     const path = {
-      'data_intg_flow_id': _params.dataIntgFlowId
+      'data_intg_flow_id': _params.dataIntgFlowId,
     };
 
     const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'cloneDatastageFlows');
@@ -420,14 +467,19 @@ class DatastageV3 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Compile DataStage flow to generate runtime assets.
@@ -444,8 +496,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.FlowCompileResponse>>}
    */
-  public compileDatastageFlows(params: DatastageV3.CompileDatastageFlowsParams): Promise<DatastageV3.Response<DatastageV3.FlowCompileResponse>> {
-    const _params = Object.assign({}, params);
+  public compileDatastageFlows(
+    params: DatastageV3.CompileDatastageFlowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.FlowCompileResponse>> {
+    const _params = { ...params };
     const requiredParams = ['dataIntgFlowId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -456,14 +510,18 @@ class DatastageV3 extends BaseService {
     const query = {
       'catalog_id': _params.catalogId,
       'project_id': _params.projectId,
-      'runtime_type': _params.runtimeType
+      'runtime_type': _params.runtimeType,
     };
 
     const path = {
-      'data_intg_flow_id': _params.dataIntgFlowId
+      'data_intg_flow_id': _params.dataIntgFlowId,
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'compileDatastageFlows');
+    const sdkHeaders = getSdkHeaders(
+      DatastageV3.DEFAULT_SERVICE_NAME,
+      'v3',
+      'compileDatastageFlows'
+    );
 
     const parameters = {
       options: {
@@ -473,14 +531,19 @@ class DatastageV3 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /*************************
    * dataStageSubflows
@@ -501,8 +564,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.Empty>>}
    */
-  public deleteDatastageSubflows(params: DatastageV3.DeleteDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.Empty>> {
-    const _params = Object.assign({}, params);
+  public deleteDatastageSubflows(
+    params: DatastageV3.DeleteDatastageSubflowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['id'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -513,10 +578,14 @@ class DatastageV3 extends BaseService {
     const query = {
       'id': _params.id,
       'catalog_id': _params.catalogId,
-      'project_id': _params.projectId
+      'project_id': _params.projectId,
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'deleteDatastageSubflows');
+    const sdkHeaders = getSdkHeaders(
+      DatastageV3.DEFAULT_SERVICE_NAME,
+      'v3',
+      'deleteDatastageSubflows'
+    );
 
     const parameters = {
       options: {
@@ -525,13 +594,12 @@ class DatastageV3 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
+        headers: extend(true, sdkHeaders, {}, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Get metadata and lock information for DataStage subflows.
@@ -573,8 +641,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>>}
    */
-  public listDatastageSubflows(params?: DatastageV3.ListDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>> {
-    const _params = Object.assign({}, params);
+  public listDatastageSubflows(
+    params?: DatastageV3.ListDatastageSubflowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.DataFlowPagedCollection>> {
+    const _params = { ...params };
 
     const query = {
       'catalog_id': _params.catalogId,
@@ -583,10 +653,14 @@ class DatastageV3 extends BaseService {
       'start': _params.start,
       'limit': _params.limit,
       'entity.name': _params.entityName,
-      'entity.description': _params.entityDescription
+      'entity.description': _params.entityDescription,
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'listDatastageSubflows');
+    const sdkHeaders = getSdkHeaders(
+      DatastageV3.DEFAULT_SERVICE_NAME,
+      'v3',
+      'listDatastageSubflows'
+    );
 
     const parameters = {
       options: {
@@ -595,14 +669,19 @@ class DatastageV3 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Create DataStage subflow.
@@ -620,8 +699,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public createDatastageSubflows(params: DatastageV3.CreateDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
-    const _params = Object.assign({}, params);
+  public createDatastageSubflows(
+    params: DatastageV3.CreateDatastageSubflowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+    const _params = { ...params };
     const requiredParams = ['dataIntgSubflowName'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -630,17 +711,21 @@ class DatastageV3 extends BaseService {
     }
 
     const body = {
-      'pipeline_flows': _params.pipelineFlows
+      'pipeline_flows': _params.pipelineFlows,
     };
 
     const query = {
       'data_intg_subflow_name': _params.dataIntgSubflowName,
       'catalog_id': _params.catalogId,
       'project_id': _params.projectId,
-      'asset_category': _params.assetCategory
+      'asset_category': _params.assetCategory,
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'createDatastageSubflows');
+    const sdkHeaders = getSdkHeaders(
+      DatastageV3.DEFAULT_SERVICE_NAME,
+      'v3',
+      'createDatastageSubflows'
+    );
 
     const parameters = {
       options: {
@@ -650,15 +735,20 @@ class DatastageV3 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-          'Content-Type': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+            'Content-Type': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Get DataStage subflow.
@@ -673,8 +763,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>>}
    */
-  public getDatastageSubflows(params: DatastageV3.GetDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>> {
-    const _params = Object.assign({}, params);
+  public getDatastageSubflows(
+    params: DatastageV3.GetDatastageSubflowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.DataIntgFlowJson>> {
+    const _params = { ...params };
     const requiredParams = ['dataIntgSubflowId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -684,14 +776,18 @@ class DatastageV3 extends BaseService {
 
     const query = {
       'catalog_id': _params.catalogId,
-      'project_id': _params.projectId
+      'project_id': _params.projectId,
     };
 
     const path = {
-      'data_intg_subflow_id': _params.dataIntgSubflowId
+      'data_intg_subflow_id': _params.dataIntgSubflowId,
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'getDatastageSubflows');
+    const sdkHeaders = getSdkHeaders(
+      DatastageV3.DEFAULT_SERVICE_NAME,
+      'v3',
+      'getDatastageSubflows'
+    );
 
     const parameters = {
       options: {
@@ -701,14 +797,19 @@ class DatastageV3 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Update DataStage subflow.
@@ -725,8 +826,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public updateDatastageSubflows(params: DatastageV3.UpdateDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
-    const _params = Object.assign({}, params);
+  public updateDatastageSubflows(
+    params: DatastageV3.UpdateDatastageSubflowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+    const _params = { ...params };
     const requiredParams = ['dataIntgSubflowId', 'dataIntgSubflowName'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -735,20 +838,24 @@ class DatastageV3 extends BaseService {
     }
 
     const body = {
-      'pipeline_flows': _params.pipelineFlows
+      'pipeline_flows': _params.pipelineFlows,
     };
 
     const query = {
       'data_intg_subflow_name': _params.dataIntgSubflowName,
       'catalog_id': _params.catalogId,
-      'project_id': _params.projectId
+      'project_id': _params.projectId,
     };
 
     const path = {
-      'data_intg_subflow_id': _params.dataIntgSubflowId
+      'data_intg_subflow_id': _params.dataIntgSubflowId,
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'updateDatastageSubflows');
+    const sdkHeaders = getSdkHeaders(
+      DatastageV3.DEFAULT_SERVICE_NAME,
+      'v3',
+      'updateDatastageSubflows'
+    );
 
     const parameters = {
       options: {
@@ -759,15 +866,20 @@ class DatastageV3 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-          'Content-Type': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+            'Content-Type': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Clone DataStage subflow.
@@ -782,8 +894,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>>}
    */
-  public cloneDatastageSubflows(params: DatastageV3.CloneDatastageSubflowsParams): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
-    const _params = Object.assign({}, params);
+  public cloneDatastageSubflows(
+    params: DatastageV3.CloneDatastageSubflowsParams
+  ): Promise<DatastageV3.Response<DatastageV3.DataIntgFlow>> {
+    const _params = { ...params };
     const requiredParams = ['dataIntgSubflowId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -793,14 +907,18 @@ class DatastageV3 extends BaseService {
 
     const query = {
       'catalog_id': _params.catalogId,
-      'project_id': _params.projectId
+      'project_id': _params.projectId,
     };
 
     const path = {
-      'data_intg_subflow_id': _params.dataIntgSubflowId
+      'data_intg_subflow_id': _params.dataIntgSubflowId,
     };
 
-    const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'cloneDatastageSubflows');
+    const sdkHeaders = getSdkHeaders(
+      DatastageV3.DEFAULT_SERVICE_NAME,
+      'v3',
+      'cloneDatastageSubflows'
+    );
 
     const parameters = {
       options: {
@@ -810,14 +928,19 @@ class DatastageV3 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /*************************
    * migration
@@ -858,8 +981,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.ImportResponse>>}
    */
-  public createMigration(params: DatastageV3.CreateMigrationParams): Promise<DatastageV3.Response<DatastageV3.ImportResponse>> {
-    const _params = Object.assign({}, params);
+  public createMigration(
+    params: DatastageV3.CreateMigrationParams
+  ): Promise<DatastageV3.Response<DatastageV3.ImportResponse>> {
+    const _params = { ...params };
     const requiredParams = ['body'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -867,14 +992,14 @@ class DatastageV3 extends BaseService {
       return Promise.reject(missingParams);
     }
 
-    const body = _params.body;
+    const { body } = _params;
     const query = {
       'catalog_id': _params.catalogId,
       'project_id': _params.projectId,
       'on_failure': _params.onFailure,
       'conflict_resolution': _params.conflictResolution,
       'attachment_type': _params.attachmentType,
-      'file_name': _params.fileName
+      'file_name': _params.fileName,
     };
 
     const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'createMigration');
@@ -887,15 +1012,20 @@ class DatastageV3 extends BaseService {
         qs: query,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-          'Content-Type': 'application/octet-stream',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+            'Content-Type': 'application/octet-stream',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Cancel a previous import request.
@@ -910,8 +1040,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.Empty>>}
    */
-  public deleteMigration(params: DatastageV3.DeleteMigrationParams): Promise<DatastageV3.Response<DatastageV3.Empty>> {
-    const _params = Object.assign({}, params);
+  public deleteMigration(
+    params: DatastageV3.DeleteMigrationParams
+  ): Promise<DatastageV3.Response<DatastageV3.Empty>> {
+    const _params = { ...params };
     const requiredParams = ['importId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -921,11 +1053,11 @@ class DatastageV3 extends BaseService {
 
     const query = {
       'catalog_id': _params.catalogId,
-      'project_id': _params.projectId
+      'project_id': _params.projectId,
     };
 
     const path = {
-      'import_id': _params.importId
+      'import_id': _params.importId,
     };
 
     const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'deleteMigration');
@@ -938,13 +1070,12 @@ class DatastageV3 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-        }, _params.headers),
+        headers: extend(true, sdkHeaders, {}, _params.headers),
       }),
     };
 
     return this.createRequest(parameters);
-  };
+  }
 
   /**
    * Get the status of a previous import request.
@@ -960,8 +1091,10 @@ class DatastageV3 extends BaseService {
    * @param {OutgoingHttpHeaders} [params.headers] - Custom request headers
    * @returns {Promise<DatastageV3.Response<DatastageV3.ImportResponse>>}
    */
-  public getMigration(params: DatastageV3.GetMigrationParams): Promise<DatastageV3.Response<DatastageV3.ImportResponse>> {
-    const _params = Object.assign({}, params);
+  public getMigration(
+    params: DatastageV3.GetMigrationParams
+  ): Promise<DatastageV3.Response<DatastageV3.ImportResponse>> {
+    const _params = { ...params };
     const requiredParams = ['importId'];
 
     const missingParams = getMissingParams(_params, requiredParams);
@@ -971,11 +1104,11 @@ class DatastageV3 extends BaseService {
 
     const query = {
       'catalog_id': _params.catalogId,
-      'project_id': _params.projectId
+      'project_id': _params.projectId,
     };
 
     const path = {
-      'import_id': _params.importId
+      'import_id': _params.importId,
     };
 
     const sdkHeaders = getSdkHeaders(DatastageV3.DEFAULT_SERVICE_NAME, 'v3', 'getMigration');
@@ -988,15 +1121,19 @@ class DatastageV3 extends BaseService {
         path,
       },
       defaultOptions: extend(true, {}, this.baseOptions, {
-        headers: extend(true, sdkHeaders, {
-          'Accept': 'application/json;charset=utf-8',
-        }, _params.headers),
+        headers: extend(
+          true,
+          sdkHeaders,
+          {
+            'Accept': 'application/json;charset=utf-8',
+          },
+          _params.headers
+        ),
       }),
     };
 
     return this.createRequest(parameters);
-  };
-
+  }
 }
 
 /*************************
@@ -1004,9 +1141,8 @@ class DatastageV3 extends BaseService {
  ************************/
 
 namespace DatastageV3 {
-
   /** An operation response. */
-  export interface Response<T = any>  {
+  export interface Response<T = any> {
     result: T;
     status: number;
     statusText: string;
@@ -1017,7 +1153,7 @@ namespace DatastageV3 {
   export type Callback<T> = (error: any, response?: Response<T>) => void;
 
   /** The body of a service request that returns no response data. */
-  export interface Empty { }
+  export interface Empty {}
 
   /** A standard JS object, defined to avoid the limitations of `Object` and `object` */
   export interface JsonObject {
@@ -1239,7 +1375,7 @@ namespace DatastageV3 {
 
   /** Parameters for the `createMigration` operation. */
   export interface CreateMigrationParams {
-    body: NodeJS.ReadableStream|Buffer;
+    body: NodeJS.ReadableStream | Buffer;
     /** The ID of the catalog to use. `catalog_id` or `project_id` is required. */
     catalogId?: string;
     /** The ID of the project to use. `catalog_id` or `project_id` is required. */
@@ -1693,7 +1829,6 @@ namespace DatastageV3 {
     /** Reference to the runtime type. */
     runtime_ref?: string;
   }
-
 }
 
 export = DatastageV3;
