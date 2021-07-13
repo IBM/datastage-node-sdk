@@ -4,7 +4,6 @@ def GH_CREDS = '2c69d250-a91e-4941-a11b-b4c831b59b90'
 //slackChannel = 'ds-nextgen-'
 //slackTeamDomain = 'ibm-analytics'
 //slackTokenCredentialId = '1d960160-45e6-48fe-a99c-66c1e25b4ced'
-def afaasCredentialsId = '10a795c2-fc1a-4b35-a0e7-644dcfcacfb8'
 def NPM_REGISTRY_DOMAIN="https://registry.npmjs.org/"
 
 properties([
@@ -25,9 +24,6 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: GH_CREDS, passwordVariable: 'GH_CREDS_PSW', usernameVariable: 'GH_CREDS_USR')]) {
         script {
-          defaultInit()
-          applyCustomizations()
-          checkoutResult = checkout scm
           //checkourResult = checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: GH_CREDS, url: 'https://github.com/IBM/datastage-java-sdk.git']]])
           //commitHash = "${checkoutResult.GIT_COMMIT[0..6]}"
             sh '''
