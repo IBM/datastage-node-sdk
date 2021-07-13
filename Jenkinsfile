@@ -55,7 +55,7 @@ pipeline {
       }
       steps {
 
-        withCredentials(string(credentialsId: 'cfa6040f-f05b-4b44-92dd-ee3ee371e546', variable: 'NPM_TOKEN')]){
+        withCredentials([string(credentialsId: 'cfa6040f-f05b-4b44-92dd-ee3ee371e546', variable: 'NPM_TOKEN')]){
           // Throw away any temporary version changes used for stage/test
           //sh 'git reset --hard'
           //bumpVersion(false)
