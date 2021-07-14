@@ -4,7 +4,7 @@ set -x
 node -v
 
 npm cache clean -f
-npm install -g n
+sudo npm install -g n
 sudo n stable
 sudo n latest
 PATH=$PATH:/usr/local/bin/node
