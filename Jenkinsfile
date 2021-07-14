@@ -4,7 +4,7 @@ def GH_CREDS = '2c69d250-a91e-4941-a11b-b4c831b59b90'
 //slackChannel = 'ds-nextgen-'
 //slackTeamDomain = 'ibm-analytics'
 //slackTokenCredentialId = '1d960160-45e6-48fe-a99c-66c1e25b4ced'
-def NPM_REGISTRY_DOMAIN="https://registry.npmjs.org/"
+//def NPM_REGISTRY_DOMAIN="https://registry.npmjs.org/"
 
 properties([
    buildDiscarder(logRotator(artifactDaysToKeepStr: '5', artifactNumToKeepStr: '5', daysToKeepStr: '5', numToKeepStr: '5'))
@@ -63,9 +63,8 @@ pipeline {
               scripts/updateNode.sh
               node -v
               npm install
-              npm config set registry "${NPM_REGISTRY_DOMAIN}"
-              npm set "${NPM_REGISTRY_DOMAIN}":_authToken "${NPM_TOKEN}"
-              npm run build
+              echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
+              #npm run build
               npm publish
           '''
           //publishDocs()
