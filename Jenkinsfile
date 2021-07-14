@@ -24,6 +24,7 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: GH_CREDS, passwordVariable: 'GH_CREDS_PSW', usernameVariable: 'GH_CREDS_USR')]) {
         script {
+          checkout scm
           //checkourResult = checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: GH_CREDS, url: 'https://github.com/IBM/datastage-java-sdk.git']]])
           //commitHash = "${checkoutResult.GIT_COMMIT[0..6]}"
             sh '''
@@ -59,10 +60,12 @@ pipeline {
           //sh 'git push --tags origin HEAD:main'
           //publishPublic()
           sh'''
+              scripts/updateNode.sh
+              node -v
               npm install
               npm config set registry "${NPM_REGISTRY_DOMAIN}"
-              npm set "${NPM_REGISTRY_DOMAIN}":_authToken "{NPM_TOKEN}"
-              npm build
+              npm set "${NPM_REGISTRY_DOMAIN}":_authToken "${NPM_TOKEN}"
+              npm run build
               npm publish
           '''
           //publishDocs()
