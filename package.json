@@ -1,6 +1,6 @@
 {
   "name": "datastage",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "IBM DataStage SDK for Node",
   "repository": {
     "type": "git",
