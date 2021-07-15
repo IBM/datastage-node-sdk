@@ -36,7 +36,6 @@ pipeline {
               git config --global credential.helper "!f() { echo password=${GH_CREDS_PSW}; echo; }; f"
               set +e
                 pip3 install --upgrade bump2version
-                bump2version -h
               set -e
             '''
           }
